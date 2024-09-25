@@ -8,9 +8,6 @@ import io.restassured.specification.RequestSpecification;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Singleton to manage objects and share their state between step definitions.
- */
 public enum CucumberTestContext {
     CONTEXT;
 

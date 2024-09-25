@@ -15,12 +15,6 @@ import java.util.Locale;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Configurable;
 
-/**
- * Class used to convert DataTable to Java Object using Jackson (Json library).
- * <p>
- * <b>NOTE:</b> This class assumes that you will use field names match the data table column headers.
- * </p>
- */
 @Configurable
 public class CucumberTypeRegistryConfigurer implements TypeRegistryConfigurer {
 
@@ -69,5 +63,4 @@ public class CucumberTypeRegistryConfigurer implements TypeRegistryConfigurer {
             return mapper.convertValue(s, aClass);
         }
     }
-
 }
