@@ -1,4 +1,4 @@
-package com.huntercodexs.cucumberdemo.employee.bdd;
+package com.huntercodexs.cucumberdemo.employee.bdd.context;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.ThreadLocal.withInitial;

@@ -1,6 +1,6 @@
 package com.huntercodexs.cucumberdemo.employee.bdd.client;
 
-import com.huntercodexs.cucumberdemo.employee.bdd.CucumberTestContext;
+import com.huntercodexs.cucumberdemo.employee.bdd.context.CucumberTestContext;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;

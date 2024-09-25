@@ -1,4 +1,4 @@
-package com.huntercodexs.cucumberdemo.employee.bdd;
+package com.huntercodexs.cucumberdemo.employee.bdd.report;
 
 import cucumber.api.junit.Cucumber;
 import java.io.File;
@@ -9,13 +9,13 @@ import net.masterthought.cucumber.ReportBuilder;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
 
-public class CucumberReportRunner extends Cucumber {
+public class CucumberReport extends Cucumber {
 
     private static final String PROJECT = "Java Spring Boot + Cucumber";
     private static final String BUILD = "1.0.0";
     private static final String BRANCH = "master";
 
-    public CucumberReportRunner(Class clazz) throws InitializationError {
+    public CucumberReport(Class clazz) throws InitializationError {
         super(clazz);
     }
 
