@@ -1,18 +1,16 @@
-package com.huntercodexs.javaspringbootcucumber.dto;
+package com.huntercodexs.cucumberdemo.employee;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
-public class EmployeeDTO {
+public class Employee {
+
     private Long id;
 
     @NotEmpty
@@ -36,5 +34,6 @@ public class EmployeeDTO {
     private String email;
 
     @NotNull
-    private List<AddressDTO> address;
+    private List<Phone> phones;
+
 }
