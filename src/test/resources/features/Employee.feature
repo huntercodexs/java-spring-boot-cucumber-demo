@@ -16,7 +16,7 @@
       When user try to save the new employee 'using all required fields'
       Then the result is 'successful' and response is ''
 
-    Scenario: Create Employee missing firstName
+    Scenario: Create Employee forgetting firstName
 
       Given user wants to create an employee using the following attributes
         | id | firstName | lastName | dateOfBirth | startDate  | endDate | employmentType | email                |

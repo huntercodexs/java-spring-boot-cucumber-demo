@@ -11,9 +11,9 @@ import org.junit.runners.model.InitializationError;
 
 public class CucumberReportRunner extends Cucumber {
 
-    private static final String PROJECT_NAME = "Hello Cucumber & Spring Boot";
-    private static final String BUILD_NUMBER = "1.0.0";
-    private static final String BRANCH_NAME = "master";
+    private static final String PROJECT = "Java Spring Boot + Cucumber";
+    private static final String BUILD = "1.0.0";
+    private static final String BRANCH = "master";
 
     public CucumberReportRunner(Class clazz) throws InitializationError {
         super(clazz);
@@ -31,10 +31,10 @@ public class CucumberReportRunner extends Cucumber {
         List<String> jsonFiles = new ArrayList<>();
         jsonFiles.add("target/cucumber-report.json");
 
-        Configuration configuration = new Configuration(reportOutputDirectory, PROJECT_NAME);
-        configuration.setBuildNumber(BUILD_NUMBER);
-        configuration.addClassifications("Build Number", configuration.getBuildNumber());
-        configuration.addClassifications("Branch Name", BRANCH_NAME);
+        Configuration configuration = new Configuration(reportOutputDirectory, PROJECT);
+        configuration.setBuildNumber(BUILD);
+        configuration.addClassifications("Build", configuration.getBuildNumber());
+        configuration.addClassifications("Branch", BRANCH);
 
         ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
         reportBuilder.generateReports();

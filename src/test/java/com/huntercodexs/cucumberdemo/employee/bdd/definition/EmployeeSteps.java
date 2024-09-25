@@ -1,8 +1,9 @@
-package com.huntercodexs.cucumberdemo.employee.bdd.stepdefs;
+package com.huntercodexs.cucumberdemo.employee.bdd.definition;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
+import com.huntercodexs.cucumberdemo.employee.bdd.client.RestAbstractClient;
 import com.huntercodexs.cucumberdemo.employee.dto.AddressDTO;
 import com.huntercodexs.cucumberdemo.employee.dto.EmployeeDTO;
 import cucumber.api.java8.En;
@@ -10,7 +11,7 @@ import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import java.util.List;
 
-public class EmployeeSteps extends AbstractSteps implements En {
+public class EmployeeSteps extends RestAbstractClient implements En {
 
     public EmployeeSteps() {
 
