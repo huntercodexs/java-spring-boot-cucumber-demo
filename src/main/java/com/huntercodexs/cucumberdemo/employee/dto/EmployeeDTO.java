@@ -1,4 +1,4 @@
-package com.huntercodexs.cucumberdemo.employee;
+package com.huntercodexs.cucumberdemo.employee.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,31 +9,21 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Employee {
-
+public class EmployeeDTO {
     private Long id;
-
     @NotEmpty
     private String firstName;
-
     @NotEmpty
     private String lastName;
-
     @NotNull
     public LocalDate dateOfBirth;
-
     @NotNull
     public LocalDate startDate;
-
     public LocalDate endDate;
-
     @NotEmpty
     private String employmentType;
-
     @NotEmpty
     private String email;
-
     @NotNull
-    private List<Phone> phones;
-
+    private List<AddressDTO> addressDTOS;
 }

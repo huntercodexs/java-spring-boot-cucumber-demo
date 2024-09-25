@@ -1,15 +1,17 @@
-Feature: Create Employee
+# language: en
 
-  Scenario: WITH ALL REQUIRED FIELDS IS SUCCESSFUL
+  Feature: Employee Handling
 
-    Given user wants to create an employee with the following attributes
-      | id  | firstName | lastName | dateOfBirth | startDate  | employmentType | email               |
-      | 100 | Rachel    | Green    | 1990-01-01  | 2018-01-01 | Permanent      | rachel.green@fs.com |
+    Scenario: Create Employee using all required fields
 
-    And with the following phone numbers
-      | id  | type   | isdCode | phoneNumber | extension |
-      | 102 | Mobile | +1      | 2141112222  |           |
-      | 103 | Office | +1      | 8362223000  | 333       |
+      Given user wants to create an employee with the following attributes
+        | id | firstName | lastName | dateOfBirth | startDate  | endDate | employmentType | email                |
+        |  1 | John      | Smith    | 1988-08-30  | 2001-11-05 |         | Contract       | john.smith@email.com |
 
-    When user saves the new employee 'WITH ALL REQUIRED FIELDS'
-    Then the save 'IS SUCCESSFUL'
+      And with the following address information
+        | id | street          | city        | number | state |
+        |  1 | Street One Test | New York    |    100 |       |
+        |  2 | Street Two Test | Springfield |    200 | Ohio  |
+
+      When user saves the new employee 'WITH ALL REQUIRED FIELDS'
+      Then the save 'IS SUCCESSFUL'
