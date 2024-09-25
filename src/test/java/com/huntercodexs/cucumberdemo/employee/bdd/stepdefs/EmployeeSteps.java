@@ -10,23 +10,14 @@ import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import java.util.List;
 
-/**
- * Step Definition Class for Employee.
- *
- * <p>Uses Java Lambda style step definitions so that we don't need to worry
- * about method naming for each step definition</p>
- */
 public class EmployeeSteps extends AbstractSteps implements En {
 
     public EmployeeSteps() {
 
-        Given("user wants to create an employee with the following attributes", (DataTable employeeDt) -> {
+        Given("user wants to create an employee using the following attributes", (DataTable employeeDt) -> {
             testContext().reset();
             List<EmployeeDTO> employeeDTOList = employeeDt.asList(EmployeeDTO.class);
-
-            // First row of DataTable has the employee attributes hence calling get(0) method.
-            super.testContext()
-                    .setPayload(employeeDTOList.get(0));
+            super.testContext().setPayload(employeeDTOList.get(0));
         });
 
         And("with the following address information", (DataTable phoneDt) -> {
@@ -36,30 +27,25 @@ public class EmployeeSteps extends AbstractSteps implements En {
                     .setAddressDTOS(addressDTOList);
         });
 
-        When("user saves the new employee {string}", (String testContext) -> {
+        When("user try to save the new employee {string}", (String testContext) -> {
             String createEmployeeUrl = "/v1/employees";
-
-            // AbstractSteps class makes the POST call and stores response in TestContext
             executePost(createEmployeeUrl);
         });
 
-        /*
-         * This can be moved to a Class named 'CommonSteps.java so that it can be reused.
-         */
-        Then("the save {string}", (String expectedResult) -> {
+        Then("the result is {string} and response is {string}", (String expectedResult, String expectedResponse) -> {
             Response response = testContext().getResponse();
 
             switch (expectedResult) {
-                case "IS SUCCESSFUL":
+                case "successful":
                     assertThat(response.statusCode()).isIn(200, 201);
                     break;
-                case "FAILS":
+                case "failure":
                     assertThat(response.statusCode()).isBetween(400, 504);
+                    assertThat(response.getBody().print()).contains(expectedResponse);
                     break;
                 default:
-                    fail("Unexpected error");
+                    fail("Error: " + response.getBody().prettyPrint());
             }
         });
-
     }
 }
