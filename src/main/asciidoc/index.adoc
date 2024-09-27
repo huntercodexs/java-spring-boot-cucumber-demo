@@ -1,0 +1,113 @@
+https://xxx[= Getting Started With Spring REST Docs]
+
+This is an example output for a service running at http://localhost:8080:
+
+Get User
+
+.curl
+include::{snippets}/get-user/curl-request.adoc[]
+
+.request
+include::{snippets}/get-user/http-request.adoc[]
+
+.response
+include::{snippets}/get-user/http-response.adoc[]
+
+Get Users
+
+.curl
+include::{snippets}/get-users/curl-request.adoc[]
+
+.request
+include::{snippets}/get-users/http-request.adoc[]
+
+.response
+include::{snippets}/get-users/http-response.adoc[]
+
+Create User
+
+.curl
+include::{snippets}/create-user/curl-request.adoc[]
+
+.request
+include::{snippets}/create-user/http-request.adoc[]
+
+.response
+include::{snippets}/create-user/http-response.adoc[]
+
+Update User
+
+.curl
+include::{snippets}/update-user/curl-request.adoc[]
+
+.request
+include::{snippets}/update-user/http-request.adoc[]
+
+.response
+include::{snippets}/update-user/http-response.adoc[]
+
+Update User Throws Exception When User Not Found
+
+.curl
+include::{snippets}/update-user-throws-exception-when-user-does-not-exist/curl-request.adoc[]
+
+.request
+include::{snippets}/update-user-throws-exception-when-user-does-not-exist/http-request.adoc[]
+
+.response
+include::{snippets}/update-user-throws-exception-when-user-does-not-exist/http-response.adoc[]
+
+Delete User
+
+.curl
+include::{snippets}/delete-user/curl-request.adoc[]
+
+.request
+include::{snippets}/delete-user/http-request.adoc[]
+
+.response
+include::{snippets}/delete-user/http-response.adoc[]
+
+Delete User Throws Exception When User Not Found
+
+.curl
+include::{snippets}/delete-user-throws-exception-when-user-not-found/curl-request.adoc[]
+
+.request
+include::{snippets}/delete-user-throws-exception-when-user-not-found/http-request.adoc[]
+
+.response
+include::{snippets}/delete-user-throws-exception-when-user-not-found/http-response.adoc[]
+
+Get Following Requests Sent To User
+
+.curl
+include::{snippets}/test-get-all-followships-to-user/curl-request.adoc[]
+
+.request
+include::{snippets}/test-get-all-followships-to-user/http-request.adoc[]
+
+.response
+include::{snippets}/test-get-all-followships-to-user/http-response.adoc[]
+
+Get Following Requests Sent By User
+
+.curl
+include::{snippets}/test-get-all-followships-from-user/curl-request.adoc[]
+
+.request
+include::{snippets}/test-get-all-followships-from-user/http-request.adoc[]
+
+.response
+include::{snippets}/test-get-all-followships-from-user/http-response.adoc[]
+
+Create Following Request
+
+.curl
+include::{snippets}/test-create-followship_-when-following-relationship-does-not-yet-exist_-returns-success/curl-request.adoc[]
+
+.request
+include::{snippets}/test-create-followship_-when-following-relationship-does-not-yet-exist_-returns-success/http-request.adoc[]
+
+.response
+include::{snippets}/test-create-followship_-when-following-relationship-does-not-yet-exist_-returns-success/http-response.adoc[]
