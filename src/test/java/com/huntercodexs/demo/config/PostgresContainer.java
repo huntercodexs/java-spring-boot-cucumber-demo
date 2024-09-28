@@ -6,14 +6,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import static com.huntercodexs.demo.util.Constants.*;
+
 @ContextConfiguration(initializers = PostgresContainer.EnvInitializer.class)
 public class PostgresContainer {
 
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:13.5")
-            .withDatabaseName("test-db")
-            .withUsername("test")
-            .withPassword("test")
-            .withExposedPorts(5432);
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DB_CONTAINER_NAME)
+            .withDatabaseName(DB_NAME)
+            .withUsername(DB_USERNAME)
+            .withPassword(DB_PASSWORD)
+            .withExposedPorts(DB_PORT);
 
     static {
         postgres.start();

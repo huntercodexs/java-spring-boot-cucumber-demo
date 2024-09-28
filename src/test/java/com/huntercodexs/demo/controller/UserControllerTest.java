@@ -19,6 +19,7 @@ import java.util.UUID;
 
 import static com.epages.restdocs.apispec.ResourceDocumentation.resource;
 import static com.huntercodexs.demo.exception.AppExceptionHandler.USER_NOT_FOUND_EXCEPTION;
+
 import static com.huntercodexs.demo.util.Utils.convertToNewObject;
 import static com.huntercodexs.demo.util.Utils.jsonStringFromObject;
 import static java.util.UUID.randomUUID;

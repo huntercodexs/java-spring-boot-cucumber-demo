@@ -2,8 +2,10 @@ package com.huntercodexs.demo.steps.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
-@ComponentScan(basePackages = {"com.huntercodexs.demo"})
+@Configuration
 @EnableAutoConfiguration
+@ComponentScan(basePackages = {"com.huntercodexs.demo"})
 public class TestConfig {
 }

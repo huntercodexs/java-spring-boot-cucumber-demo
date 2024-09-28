@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.huntercodexs.demo.config.Constants.*;
-import static com.huntercodexs.demo.utils.Utils.getMockRequest;
+import static com.huntercodexs.demo.util.Constants.*;
+import static com.huntercodexs.demo.util.Utils4Test.getMockRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PactConsumerTestExt.class)

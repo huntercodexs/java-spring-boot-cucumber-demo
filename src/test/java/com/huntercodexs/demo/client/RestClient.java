@@ -29,7 +29,8 @@ public class RestClient {
                 .updateCurl(curl -> curl
                         .removeHeader("Host")
                         .removeHeader("User-Agent")
-                        .removeHeader("Connection"))
+                        .removeHeader("Connection")
+                        .removeHeader("Keep-Alive"))
                 .build();
 
         RestAssuredConfig config = CurlRestAssuredConfigFactory

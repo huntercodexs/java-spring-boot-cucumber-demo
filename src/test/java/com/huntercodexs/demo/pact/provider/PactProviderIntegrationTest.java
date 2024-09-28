@@ -23,13 +23,13 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.huntercodexs.demo.Constants.USER_ID;
-import static com.huntercodexs.demo.util.Utils.convertToNewObject;
-import static com.huntercodexs.demo.utils.Utils.getRequestSpecification;
-import static com.huntercodexs.demo.utils.Utils.logCurlFromPact;
-import static java.util.UUID.randomUUID;
+import static com.huntercodexs.demo.util.Constants.*;
+import static com.huntercodexs.demo.util.Utils4Test.getRequestSpecification;
+import static com.huntercodexs.demo.util.Utils4Test.logCurlFromPact;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
@@ -40,32 +40,29 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TE
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql(scripts = {"classpath:clean-up.sql", "classpath:init.sql"}, executionPhase = BEFORE_TEST_METHOD)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PactProviderIT extends BasePostgresConfig {
+class PactProviderIntegrationTest extends BasePostgresConfig {
 
     @LocalServerPort
     int port;
 
     RequestSpecification rq;
 
-    final String username = "usernamed";
-    final String password = "passwordd";
-
     @BeforeAll
     void setUp() {
         Map<String, String> headers = new HashMap<>();
         rq = getRequestSpecification().baseUri("http://localhost:" + port)
                 .contentType(ContentType.JSON)
-                .auth().basic(username, password)
+                .auth().basic(PACT_USERNAME, PACT_PASSWORD)
                 .headers(headers);
 
-        createUserResponseHelper(username, password);
+        createUserResponseHelper(PACT_USERNAME, PACT_PASSWORD);
     }
 
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void pactTestTemplate(PactVerificationContext context, HttpRequest request) {
         String encoded = Base64.getEncoder()
-                .encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+                .encodeToString((PACT_USERNAME + ":" + PACT_PASSWORD).getBytes(StandardCharsets.UTF_8));
         request.addHeader("Authorization", "Basic " + encoded);
 
         logCurlFromPact(context, request, "http://localhost:" + port);

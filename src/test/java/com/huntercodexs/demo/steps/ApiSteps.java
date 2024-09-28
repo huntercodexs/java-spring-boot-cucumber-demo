@@ -9,12 +9,16 @@ import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import static com.huntercodexs.demo.config.Constants.PASSWORD;
-import static com.huntercodexs.demo.config.Constants.USERNAME;
+import static com.huntercodexs.demo.util.Constants.DB_PASSWORD;
+import static com.huntercodexs.demo.util.Constants.DB_USERNAME;
 
 @Data
+@Getter
+@Setter
 @RequiredArgsConstructor
 public class ApiSteps {
 
@@ -26,8 +30,12 @@ public class ApiSteps {
 
     @Given("I access the get users endpoint")
     public void iAccessGetUsersEndpoint() {
-        RequestSpecification rq = restClient.getRequestSpecification()
-                .auth().basic(USERNAME, PASSWORD);
+
+        RequestSpecification rq = restClient
+                .getRequestSpecification()
+                .auth()
+                .basic(DB_USERNAME, DB_PASSWORD);
+
         setResponse(rq.get("/api/v1/demo/users/"));
     }
 

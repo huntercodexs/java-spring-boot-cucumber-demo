@@ -6,10 +6,14 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 
-@Profile("test")
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+@Profile("dev")
+@ActiveProfiles("dev")
+@SpringBootTest(classes = TestConfig.class, webEnvironment = RANDOM_PORT)
 @CucumberContextConfiguration
-@SpringBootTest(classes = TestConfig.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CucumberSpringConfiguration extends BasePostgresConfig {
 
     @LocalServerPort

@@ -13,9 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 public class DBSteps {
 
     private final DBClient dbClient;
+    private final UserContext userContext;
     private final UserRepository userRepository;
-
-    private final UserContext uc;
 
     @Given("I add a user to the DB with username {string} and password {string}")
     public void iAddUserToDB(String username, String password) {
@@ -27,7 +26,7 @@ public class DBSteps {
             userEntity = userRepository.save(userEntity);
         }
 
-        uc.setUserDB(userEntity);
+        userContext.setUserDB(userEntity);
     }
 
     @Given("I add a second user to the DB with username {string} and password {string}")
@@ -40,12 +39,12 @@ public class DBSteps {
             userEntity = userRepository.save(userEntity);
         }
 
-        uc.setSecondUserDB(userEntity);
+        userContext.setSecondUserDB(userEntity);
     }
 
     @Given("I access the users DB data")
     public void iAccessUsersDBData() {
-        uc.setUserListDB(dbClient.getUsers());
+        userContext.setUserListDB(dbClient.getUsers());
     }
 
     @Given("an authenticated user with username {string} and password {string} logs into the system")
@@ -58,7 +57,7 @@ public class DBSteps {
             userEntity.setPassword(password);
         }
 
-        uc.setUserDB(userEntity);
+        userContext.setUserDB(userEntity);
     }
 
     private UserEntity getUserEntity() {

@@ -1,4 +1,4 @@
-package com.huntercodexs.demo.utils;
+package com.huntercodexs.demo.util;
 
 import au.com.dius.pact.core.model.RequestResponseInteraction;
 import au.com.dius.pact.provider.junit5.PactVerificationContext;
@@ -20,11 +20,11 @@ import org.apache.hc.core5.http.HttpRequest;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import static com.huntercodexs.demo.config.Constants.MOCK_PACT_URL;
+import static com.huntercodexs.demo.util.Constants.MOCK_PACT_URL;
 import static io.restassured.RestAssured.given;
 
 @Slf4j
-public class Utils {
+public class Utils4Test {
 
     public static RequestSpecification getRequestSpecification() {
 

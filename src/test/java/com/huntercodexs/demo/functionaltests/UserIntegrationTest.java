@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.huntercodexs.demo.utils.Utils.getRequestSpecification;
+import static com.huntercodexs.demo.util.Utils4Test.getRequestSpecification;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserIT extends BasePostgresConfig {
+class UserIntegrationTest extends BasePostgresConfig {
 
     @LocalServerPort
     int port;
