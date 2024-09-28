@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import static com.huntercodexs.demo.config.ConstantsConfig.USERS;
+import static com.huntercodexs.demo.config.ConstantsConfig.USERS_UP;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -27,10 +29,10 @@ class UserRepositoryTest {
 
         UserEntity finalUserEntity = userEntity;
         assertAll(
-                () -> assertEquals("anyName", finalUserEntity.getName()),
-                () -> assertEquals("anyUsername", finalUserEntity.getUsername()),
-                () -> assertEquals("anyPassword", finalUserEntity.getPassword()),
-                () -> assertEquals("anyEmail", finalUserEntity.getEmail())
+                () -> assertEquals(USERS[0][1], finalUserEntity.getName()),
+                () -> assertEquals(USERS[0][2], finalUserEntity.getUsername()),
+                () -> assertEquals(USERS[0][3], finalUserEntity.getPassword()),
+                () -> assertEquals(USERS[0][4], finalUserEntity.getEmail())
         );
     }
 
@@ -41,10 +43,10 @@ class UserRepositoryTest {
         assertNotNull(userEntity);
 
         assertAll(
-                () -> assertEquals("anyName", userEntity.getName()),
-                () -> assertEquals("anyUsername", userEntity.getUsername()),
-                () -> assertEquals("anyPassword", userEntity.getPassword()),
-                () -> assertEquals("anyEmail", userEntity.getEmail())
+                () -> assertEquals(USERS[0][1], userEntity.getName()),
+                () -> assertEquals(USERS[0][2], userEntity.getUsername()),
+                () -> assertEquals(USERS[0][3], userEntity.getPassword()),
+                () -> assertEquals(USERS[0][4], userEntity.getEmail())
         );
     }
 
@@ -65,17 +67,21 @@ class UserRepositoryTest {
     @NotNull
     private UserEntity saveUserEntityHelper() {
 
+        //TODO: Check this logic and functionality, looks like confusing
         UserEntity userFromEntity = UserEntity.builder().name("anySender").build();
+
         UserEntity userToEntity = UserEntity.builder().name("anyReceiver").build();
-        userFromEntity = userRepository.save(userFromEntity);
-        userToEntity = userRepository.save(userToEntity);
+
+        userRepository.save(userFromEntity);
+        userRepository.save(userToEntity);
 
         UserEntity userEntity = UserEntity.builder()
-                .name("anyName")
-                .username("anyUsername")
-                .password("anyPassword")
-                .email("anyEmail")
+                .name(USERS[0][1])
+                .username(USERS[0][2])
+                .password(USERS[0][3])
+                .email(USERS[0][4])
                 .build();
+
         userEntity = userRepository.save(userEntity);
 
         return userEntity;
@@ -83,10 +89,10 @@ class UserRepositoryTest {
 
     @NotNull
     private UserEntity getUpdatedUserEntityHelper(UserEntity userEntity) {
-        userEntity.setName("anyUpdatedName");
-        userEntity.setUsername("anyUsername");
-        userEntity.setPassword("anyPassword");
-        userEntity.setEmail("anyEmail");
+        userEntity.setName(USERS_UP[0][0]);
+        userEntity.setUsername(USERS_UP[0][2]);
+        userEntity.setPassword(USERS_UP[0][3]);
+        userEntity.setEmail(USERS_UP[0][4]);
 
         userEntity = userRepository.save(userEntity);
         return userEntity;

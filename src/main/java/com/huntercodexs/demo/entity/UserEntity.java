@@ -6,12 +6,12 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
 public class UserEntity {
     @Id
     @GeneratedValue
@@ -27,6 +27,6 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 }

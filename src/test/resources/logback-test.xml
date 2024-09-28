@@ -17,7 +17,7 @@
         </layout>
     </appender>
 
-    <logger name="com.huntercodexs.demo.util.Utils4Test" level="debug">
+    <logger name="com.huntercodexs.demo.util.ResourceUtil" level="debug">
         <appender-ref ref="File"/>
     </logger>
 

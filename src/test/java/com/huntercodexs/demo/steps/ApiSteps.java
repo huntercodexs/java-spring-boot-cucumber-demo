@@ -13,8 +13,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import static com.huntercodexs.demo.util.Constants.DB_PASSWORD;
-import static com.huntercodexs.demo.util.Constants.DB_USERNAME;
+import static com.huntercodexs.demo.config.ConstantsConfig.DB_PASSWORD;
+import static com.huntercodexs.demo.config.ConstantsConfig.DB_USERNAME;
 
 @Data
 @Getter
@@ -22,11 +22,9 @@ import static com.huntercodexs.demo.util.Constants.DB_USERNAME;
 @RequiredArgsConstructor
 public class ApiSteps {
 
-    private final RestClient restClient;
-
     private Response response;
-
-    private final UserContext uc;
+    private final RestClient restClient;
+    private final UserContext userContext;
 
     @Given("I access the get users endpoint")
     public void iAccessGetUsersEndpoint() {
@@ -70,7 +68,7 @@ public class ApiSteps {
     }
 
     public RequestSpecification getRqWithAuth() {
-        return restClient.getRequestSpecification().auth().basic(uc.getUserDB().getUsername(), uc.getUserDB().getPassword());
+        return restClient.getRequestSpecification().auth().basic(userContext.getFirstUserDB().getUsername(), userContext.getFirstUserDB().getPassword());
     }
 
     public RequestSpecification getRqWithAuth(String username, String password) {

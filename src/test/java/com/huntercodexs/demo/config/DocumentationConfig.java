@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static com.huntercodexs.demo.config.ConstantsConfig.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
@@ -23,7 +24,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class, MockitoExtension.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public abstract class BaseDocTestConfig {
+public abstract class DocumentationConfig {
 
     @Autowired
     protected MockMvc mockMvc;
@@ -36,9 +37,9 @@ public abstract class BaseDocTestConfig {
                         preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
                 .apply(MockMvcRestDocumentation.documentationConfiguration(restDocumentation)
                         .uris()
-                        .withScheme("http")
-                        .withHost("localhost")
-                        .withPort(8080)
+                        .withScheme(PROTOCOL)
+                        .withHost(APP_HOST)
+                        .withPort(DEF_PORT)
                         .and().snippets()
                         .withDefaults(CliDocumentation.curlRequest(),
                                 HttpDocumentation.httpRequest(),

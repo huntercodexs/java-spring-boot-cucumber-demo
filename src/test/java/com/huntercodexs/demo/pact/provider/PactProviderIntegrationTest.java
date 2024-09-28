@@ -6,8 +6,9 @@ import au.com.dius.pact.provider.junit5.PactVerificationInvocationContextProvide
 import au.com.dius.pact.provider.junitsupport.Provider;
 import au.com.dius.pact.provider.junitsupport.State;
 import au.com.dius.pact.provider.junitsupport.VerificationReports;
+import au.com.dius.pact.provider.junitsupport.loader.PactBroker;
 import au.com.dius.pact.provider.junitsupport.loader.PactFolder;
-import com.huntercodexs.demo.config.BasePostgresConfig;
+import com.huntercodexs.demo.container.PostgresContainerSettings;
 import com.huntercodexs.demo.model.UserModel;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -27,20 +28,20 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.huntercodexs.demo.util.Constants.*;
-import static com.huntercodexs.demo.util.Utils4Test.getRequestSpecification;
-import static com.huntercodexs.demo.util.Utils4Test.logCurlFromPact;
+import static com.huntercodexs.demo.config.ConstantsConfig.*;
+import static com.huntercodexs.demo.util.ResourceUtil.getRequestSpecification;
+import static com.huntercodexs.demo.util.ResourceUtil.logCurlFromPact;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
-@Provider("MY_PROVIDER")
+@Provider(PACT_PROVIDER)
 @PactFolder("target/pacts")
-//@PactBroker(host = BROKER_PACT_URL, consumers = {"MY_CONSUMER"})
+@PactBroker(host = PACT_URL_MOCK, consumers = {PACT_CONSUMER})
 @VerificationReports(value = {"markdown"}, reportDir = "target/pacts")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(scripts = {"classpath:clean-up.sql", "classpath:init.sql"}, executionPhase = BEFORE_TEST_METHOD)
+@Sql(scripts = {"classpath:reset.sql", "classpath:init.sql"}, executionPhase = BEFORE_TEST_METHOD)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class PactProviderIntegrationTest extends BasePostgresConfig {
+class PactProviderIntegrationTest extends PostgresContainerSettings {
 
     @LocalServerPort
     int port;
@@ -50,12 +51,15 @@ class PactProviderIntegrationTest extends BasePostgresConfig {
     @BeforeAll
     void setUp() {
         Map<String, String> headers = new HashMap<>();
-        rq = getRequestSpecification().baseUri("http://localhost:" + port)
+
+        rq = getRequestSpecification()
+                .baseUri("http://localhost:" + port)
                 .contentType(ContentType.JSON)
-                .auth().basic(PACT_USERNAME, PACT_PASSWORD)
+                .auth()
+                .basic(PACT_USERNAME, PACT_PASSWORD)
                 .headers(headers);
 
-        createUserResponseHelper(PACT_USERNAME, PACT_PASSWORD);
+        createUserResponseHelper(0);
     }
 
     @TestTemplate
@@ -63,10 +67,9 @@ class PactProviderIntegrationTest extends BasePostgresConfig {
     void pactTestTemplate(PactVerificationContext context, HttpRequest request) {
         String encoded = Base64.getEncoder()
                 .encodeToString((PACT_USERNAME + ":" + PACT_PASSWORD).getBytes(StandardCharsets.UTF_8));
+
         request.addHeader("Authorization", "Basic " + encoded);
-
         logCurlFromPact(context, request, "http://localhost:" + port);
-
         context.verifyInteraction();
     }
 
@@ -78,140 +81,26 @@ class PactProviderIntegrationTest extends BasePostgresConfig {
     @State("A request to retrieve a user")
     Map<String, Object> getUser() {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", "d3256c76-62d7-4481-9d1c-a0ccc4da380f");
+        map.put("userId", USERS[0][0]);
         return map;
     }
 
     @State("A request to update a user")
     Map<String, Object> updateUser() {
         Map<String, Object> map = new HashMap<>();
-        map.put("userId", "d3256c76-62d7-4481-9d1c-a0ccc4da380f");
+        map.put("userId", USERS[0][0]);
         return map;
     }
 
-    @State("A request to retrieve a followship")
-    Map<String, Object> getFollowship() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("followshipId", "1b00ce80-806b-4d16-b0ec-32f5396ba4b0");
-        return map;
-    }
-
-    @State("A request to retrieve a list of followships sent from a given user")
-    Map<String, Object> getFollowingRequestsFromUser() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", "ca3569ee-cb62-4f45-b1c2-199028ba5562");
-        return map;
-    }
-
-    @State("A request to retrieve a list of followships sent to a given user")
-    Map<String, Object> getFollowingRequestsToUser() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", "ca3569ee-cb62-4f45-b1c2-199028ba5562");
-        return map;
-    }
-
-    @State("A request to retrieve a moment")
-    Map<String, Object> getMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "e1f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to update a moment")
-    Map<String, Object> updateMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "e1f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to like a moment")
-    Map<String, Object> likeMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", USER_ID);
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to remove a like for a moment")
-    Map<String, Object> unlikeMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("userId", USER_ID);
-        map.put("momentId", "c3f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to create a comment for a moment")
-    Map<String, Object> createComment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to retrieve a comment")
-    Map<String, Object> getComment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        map.put("commentId", "a2f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to retrieve a list of comments for a moment")
-    Map<String, Object> getCommentsForMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to update a comment for a moment")
-    Map<String, Object> updateCommentForMoment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        map.put("commentId", "a2f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to create a reply to a comment")
-    Map<String, Object> createReplyToComment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        map.put("commentId", "a2f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to retrieve replies for a comment")
-    Map<String, Object> getRepliesForComment() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("momentId", "b3f6bea6-4684-403e-9c41-8704fb0600c0");
-        map.put("commentId", "a2f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A message exists")
-    Map<String, Object> mapMessage() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("messageId", "a3f6bea6-4684-403e-9c41-8704fb0600c0");
-        return map;
-    }
-
-    @State("A request to retrieve a chat")
-    Map<String, Object> getChat() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("chatId", "a2f6bea6-4684-403e-9c41-8704fb0600f4");
-        return map;
-    }
-
-    @State("A request to retrieve a list of chats")
-    void getChats() {}
-
-    private void createUserResponseHelper(String username, String password) {
+    private void createUserResponseHelper(int userIndex) {
         UserModel user = UserModel.builder()
-                .name("anyName")
-                .username(username)
-                .password(password)
-                .email("anyEmail")
+                .name(USERS[userIndex][1])
+                .username(USERS[userIndex][2])
+                .password(USERS[userIndex][3])
+                .email(USERS[userIndex][4])
                 .build();
 
-        Response response = rq.body(user).post("/api/v1/demo/users");
+        Response response = rq.body(user).post(URI_USERS);
         assertEquals(201, response.getStatusCode());
     }
 }

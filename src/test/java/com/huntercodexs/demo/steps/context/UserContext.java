@@ -17,7 +17,7 @@ import java.util.List;
 public class UserContext {
 
     private List<UserEntity> userListDB;
-    private UserEntity userDB;
+    private UserEntity firstUserDB;
     private UserEntity secondUserDB;
 
 }

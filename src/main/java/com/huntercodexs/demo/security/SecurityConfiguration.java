@@ -33,12 +33,16 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/v1/users", "/api/v1/users/").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(
+                                "/api/v1/users",
+                                "/api/v1/users/"
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS)
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
                 .httpBasic(withDefaults());
         return http.build();
     }

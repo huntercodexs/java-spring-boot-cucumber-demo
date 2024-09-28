@@ -11,20 +11,18 @@ import com.github.dzieciou.testing.curl.Options;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.mapper.factory.Jackson2ObjectMapperFactory;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.HttpRequest;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
-import static com.huntercodexs.demo.util.Constants.MOCK_PACT_URL;
+import static com.huntercodexs.demo.config.ConstantsConfig.PACT_URL_MOCK;
 import static io.restassured.RestAssured.given;
 
 @Slf4j
-public class Utils4Test {
+public class ResourceUtil {
 
     public static RequestSpecification getRequestSpecification() {
 
@@ -36,17 +34,17 @@ public class Utils4Test {
                         .removeHeader("Connection"))
                 .build();
 
-        RestAssuredConfig config = CurlRestAssuredConfigFactory.createConfig(options).objectMapperConfig(new ObjectMapperConfig().jackson2ObjectMapperFactory(
-                new Jackson2ObjectMapperFactory() {
-                    @Override
-                    public ObjectMapper create(Type type, String charset) {
-                        ObjectMapper om = new ObjectMapper().findAndRegisterModules();
-                        om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                        om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-                        om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-                        return om;
-                    }
-                }));
+        RestAssuredConfig config = CurlRestAssuredConfigFactory
+                .createConfig(options)
+                .objectMapperConfig(new ObjectMapperConfig()
+                        .jackson2ObjectMapperFactory(
+                                (type, charset) -> {
+                                    ObjectMapper om = new ObjectMapper().findAndRegisterModules();
+                                    om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                                    om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+                                    om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                                    return om;
+                                }));
 
         return given()
                 .config(config)
@@ -67,22 +65,29 @@ public class Utils4Test {
         String url = baseUri + request.getPath();
 
         Header[] headers = request.getHeaders();
-        String headersString = "";
+        StringBuilder headersString = new StringBuilder();
         for (Header s : headers) {
-            headersString = headersString + "--header " + "'" + s.getName() + ": " + s.getValue() + "'" + "\\" + "\n";
+            headersString
+                    .append("--header ")
+                    .append("'")
+                    .append(s.getName())
+                    .append(": ")
+                    .append(s.getValue())
+                    .append("'")
+                    .append("\\")
+                    .append("\n");
         }
 
         String curl = """
                 curl --request %s '%s' \
                 %s --data-binary '%s' \
                 --compressed --insecure --verbose
-                """.formatted(method, url, headersString, bodyParam);
-
+                """.formatted(method, url, headersString.toString(), bodyParam);
 
         log.debug(curl + "\n\n " + bodyResponse + "\n ---- \n\n");
     }
 
     public static RequestSpecification getMockRequest(Map<String, String> headers) {
-        return getRequestSpecification().baseUri(MOCK_PACT_URL).headers(headers);
+        return getRequestSpecification().baseUri(PACT_URL_MOCK).headers(headers);
     }
 }

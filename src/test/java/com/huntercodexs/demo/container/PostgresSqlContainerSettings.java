@@ -1,20 +1,20 @@
-package com.huntercodexs.demo.config;
+package com.huntercodexs.demo.container;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 
-public class PostgresSqlContainer extends PostgreSQLContainer<PostgresSqlContainer> {
+import static com.huntercodexs.demo.config.ConstantsConfig.DB_CONTAINER_VERSION;
 
-    private static final String IMAGE_VERSION = "postgres:13.5";
+public class PostgresSqlContainerSettings extends PostgreSQLContainer<PostgresSqlContainerSettings> {
 
-    private static PostgresSqlContainer container;
+    private static PostgresSqlContainerSettings container;
 
-    private PostgresSqlContainer() {
-        super(IMAGE_VERSION);
+    private PostgresSqlContainerSettings() {
+        super(DB_CONTAINER_VERSION);
     }
 
-    public static PostgresSqlContainer getInstance() {
+    public static PostgresSqlContainerSettings getInstance() {
         if (container == null) {
-            container = new PostgresSqlContainer().withReuse(true);// .withInitScript("db-table-structure.sql");
+            container = new PostgresSqlContainerSettings().withReuse(true);
         }
         return container;
     }

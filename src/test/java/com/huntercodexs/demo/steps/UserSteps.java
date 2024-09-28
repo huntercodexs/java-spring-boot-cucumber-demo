@@ -18,12 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserSteps {
 
     private final ApiSteps apiSteps;
-    private final UserContext uc;
+    private final UserContext userContext;
 
     @Then("I validate the response for the get users endpoint against the database")
     public void iValidateResponseForGetUsersEndpointAgainstTheDatabase() {
         List<UserModel> userListApi = Arrays.asList(apiSteps.getResponse().as(UserModel[].class));
-        List<UserEntity> userListDB = uc.getUserListDB();
+        List<UserEntity> userListDB = userContext.getUserListDB();
 
         for (UserEntity userDB : userListDB) {
             Optional<UserModel> matchingUser = findApiUserMatchingDB(userListApi, userDB);

@@ -15,10 +15,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import static com.huntercodexs.demo.util.Constants.*;
-import static com.huntercodexs.demo.util.Utils4Test.getMockRequest;
+import static com.huntercodexs.demo.config.ConstantsConfig.*;
+import static com.huntercodexs.demo.util.ResourceUtil.getMockRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PactConsumerTestExt.class)
@@ -26,36 +25,33 @@ class UpdateUserIntegrationTest {
 
     Map<String, String> headers = new HashMap<>();
 
-    String path = "/api/v1/demo/users/";
-    UUID userId = UUID.fromString("1bfff94a-b70e-4b39-bd2a-be1c0f898589");
-
     @Pact(provider = PACT_PROVIDER, consumer = PACT_CONSUMER)
     public RequestResponsePact createPact(PactDslWithProvider builder) {
         headers.put("Content-Type", "application/json");
         headers.put("Accept", "application/json");
 
         DslPart bodyReceived = new PactDslJsonBody()
-                .stringType("name", "anyName")
-                .stringType("username", "anyUsername")
-                .stringType("password", "anyPassword")
-                .stringType("email", "anyEmail")
-                .uuid("id", "e135b321-c58d-47c3-b9c4-c081a5b4684f")
+                .stringType("name", USERS[0][1])
+                .stringType("username", USERS[0][2])
+                .stringType("password", USERS[0][3])
+                .stringType("email", USERS[0][4])
+                .uuid("id", USERS[0][0])
                 .closeArray()
                 .close();
 
         DslPart bodyReturned = new PactDslJsonBody()
-                .uuid("id", userId)
-                .stringType("name", "anyName")
-                .stringType("username", "anyUsername")
-                .stringType("password", "anyPassword")
-                .stringType("email", "anyEmail")
+                .uuid("id", USERS[0][0])
+                .stringType("name", USERS[0][1])
+                .stringType("username", USERS[0][2])
+                .stringType("password", USERS[0][3])
+                .stringType("email", USERS[0][4])
                 .closeArray()
                 .close();
 
         return builder
                 .given("A request to update a user")
                 .uponReceiving("A request to update a user")
-                .pathFromProviderState(path + "${userId}", path + userId)
+                .pathFromProviderState(URI_USERS +"/"+ "${userId}", URI_USERS +"/"+ USERS[0][0])
                 .body(bodyReceived)
                 .method("PUT")
                 .headers(headers)
@@ -66,16 +62,16 @@ class UpdateUserIntegrationTest {
     }
 
     @Test
-    @PactTestFor(providerName = PACT_PROVIDER, port = MOCK_PACT_PORT, pactVersion = PactSpecVersion.V3)
+    @PactTestFor(providerName = PACT_PROVIDER, port = PACT_PORT_MOCK, pactVersion = PactSpecVersion.V3)
     void runTest() {
         UserModel userModel = UserModel.builder()
-                .name("anyName")
-                .username("anyUsername")
-                .password("anyPassword")
-                .email("anyEmail")
+                .name(USERS[0][1])
+                .username(USERS[0][2])
+                .password(USERS[0][3])
+                .email(USERS[0][4])
                 .build();
 
-        Response response = getMockRequest(headers).body(userModel).put(path + userId);
+        Response response = getMockRequest(headers).body(userModel).put(URI_USERS +"/"+ USERS[0][0]);
         assertEquals(200, response.getStatusCode());
     }
 

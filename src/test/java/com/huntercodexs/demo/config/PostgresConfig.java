@@ -6,10 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import static com.huntercodexs.demo.util.Constants.*;
+import static com.huntercodexs.demo.config.ConstantsConfig.*;
 
-@ContextConfiguration(initializers = PostgresContainer.EnvInitializer.class)
-public class PostgresContainer {
+@ContextConfiguration(initializers = PostgresConfig.EnvInitializer.class)
+public class PostgresConfig {
 
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DB_CONTAINER_NAME)
             .withDatabaseName(DB_NAME)
