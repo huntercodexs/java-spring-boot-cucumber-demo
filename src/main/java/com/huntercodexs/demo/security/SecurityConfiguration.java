@@ -42,9 +42,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS)
                         .permitAll()
                         .anyRequest()
-                        .permitAll());
-                        //.authenticated()
-                        //).httpBasic(withDefaults());
+                        //.permitAll() /*Allow access without authentication*/
+                        .authenticated() /*Deny access without authentication*/
+                ).httpBasic(withDefaults());
         return http.build();
     }
 

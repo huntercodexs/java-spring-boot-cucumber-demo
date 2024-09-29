@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserEntity userEntity = userRepository.findByUsername(username);
 
         if (userEntity == null) {
-            System.out.println("Username not found: " + username);
+            System.out.println("=====[USER NOT FOUND]> : " + username);
             throw new UsernameNotFoundException(username);
         }
 

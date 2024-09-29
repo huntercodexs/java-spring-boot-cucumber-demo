@@ -1,6 +1,5 @@
 package com.huntercodexs.demo.steps.config;
 
-import com.huntercodexs.demo.container.PostgresContainerSettings;
 import io.cucumber.spring.CucumberContextConfiguration;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +14,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles(PROFILE)
 @CucumberContextConfiguration
 @SpringBootTest(classes = TestConfig.class, webEnvironment = RANDOM_PORT)
-public class CucumberSpringConfiguration extends PostgresContainerSettings {
+//public class CucumberSpringConfiguration extends PostgresContainerSettings {
+public class CucumberSpringConfiguration {
 
     @LocalServerPort
     int port;

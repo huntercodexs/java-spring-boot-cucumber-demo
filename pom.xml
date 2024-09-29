@@ -350,6 +350,7 @@
 						</extent.reporter.html.config>
 						<cucumber.publish.quiet>true</cucumber.publish.quiet>
 					</systemPropertyVariables>
+					<argLine>--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
 				</configuration>
 				<executions>
 					<execution>
@@ -634,7 +635,7 @@
 				<java.version>17</java.version>
 				<sonar.exclusions>**/entity/**</sonar.exclusions>
 				<sonar.coverage.exclusions>
-					**/Application.java, **/*Exception*.java, **/dao/**, **/dto/**, **/entity/**
+					**/Application.java, **/*Exception*.java, **/repository/**, **/dto/**, **/entity/**, **/model/**
 				</sonar.coverage.exclusions>
 				<sonar.test.exclusions>src/test/**/*</sonar.test.exclusions>
 			</properties>

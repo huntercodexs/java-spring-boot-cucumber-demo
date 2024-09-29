@@ -21,8 +21,8 @@ public class UserSteps {
     private final ApiSteps apiSteps;
     private final UserContext userContext;
 
-    @Then("I validate the response for the get users endpoint against the database")
-    public void iValidateResponseForGetUsersEndpointAgainstTheDatabase() {
+    @Then("the response is validated again from get users endpoint request")
+    public void theResponseIsValidatedAgainFromGetUsersEndpointRequest() {
         List<UserModel> userListApi = Arrays.asList(apiSteps.getResponse().as(UserModel[].class));
         List<UserEntity> userListDB = userContext.getUserListDB();
 

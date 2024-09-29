@@ -15,23 +15,23 @@ public class DBSteps {
     private final UserContext userContext;
     private final DatabaseUtil databaseUtil;
 
-    @Given("I add a first user to the DB with username {string} and password {string}")
-    public void iAddUserToDB(String username, String password) {
+    @Given("the first user is added into database using username {string} and password {string}")
+    public void addingFirstUserIntoDatabase(String username, String password) {
         userContext.setFirstUserDB(databaseUtil.findUserByUsername(username, password));
     }
 
     @Given("I add a second user to the DB with username {string} and password {string}")
-    public void iAddSecondUserToDB(String username, String password) {
+    public void addingSecondUserIntoDatabase(String username, String password) {
         userContext.setSecondUserDB(databaseUtil.findUserByUsername(username, password));
     }
 
-    @Given("I access the users DB data")
-    public void iAccessUsersDBData() {
+    @Given("database is accessed")
+    public void databaseIsAceessed() {
         userContext.setUserListDB(dbClient.getUsers());
     }
 
     @Given("an authenticated user with username {string} and password {string} logs into the system")
-    public void userWithUsernameLogsIntoSystem(String username, String password) {
+    public void userAuthenticatedUsingUsernameAndPassword(String username, String password) {
         userContext.setFirstUserDB(databaseUtil.findUserByUsername(username, password));
     }
 

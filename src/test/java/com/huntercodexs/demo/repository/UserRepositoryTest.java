@@ -24,8 +24,6 @@ class UserRepositoryTest {
         UserEntity userEntity = saveUserEntityHelper();
         userEntity = userRepository.findById(userEntity.getId()).orElse(null);
 
-        System.out.println("==============+> " + userEntity.getName());
-
         assertTrue(userRepository.findAll().size() > 0);
         assertNotNull(userEntity);
 

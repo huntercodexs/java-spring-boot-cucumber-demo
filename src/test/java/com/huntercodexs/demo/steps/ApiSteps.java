@@ -25,43 +25,43 @@ public class ApiSteps {
     private final RestClient restClient;
     private final UserContext userContext;
 
-    @Given("I access the get users endpoint")
-    public void iAccessGetUsersEndpoint() {
+    @Given("users endpoint is accessed using get")
+    public void usersEndpointIsAccessedUsingGet() {
         RequestSpecification rq = restClient
                 .getRequestSpecification()
                 .auth()
-                .basic(USERS[0][1], USERS[0][1]);
+                .basic(USERS[0][2], USERS[0][3]);
 
         setResponse(rq.get(URI_USERS));
     }
 
-    @Then("^I get a (\\d+) (successful|error) response$")
-    public void iGetResponse(int responseCode, String responseType) {
+    @Then("^the result is (\\d+) (successful|error) http response$")
+    public void theResultIsSuccessfulOrErrorFromHttpResponse(int responseCode, String responseType) {
         response.then().statusCode(responseCode);
     }
 
     @Then("The creation request is successful")
-    public void iGetSuccessfulCreationResponse() {
+    public void theCreationRequestIsSuccessful() {
         response.then().statusCode(201);
     }
 
     @Then("The creation request fails with a bad request error")
-    public void iGetErrorForCreationRequest() {
+    public void theCreationRequestFailsWithBadRequestError() {
         response.then().statusCode(400);
     }
 
     @Then("The retrieval request is successful")
-    public void iGetSuccessfulRetrievalResponse() {
+    public void theRetrievalRequestIsSuccessful() {
         response.then().statusCode(200);
     }
 
     @Then("^the system should block the user with a forbidden error")
-    public void theUserIsBlockedWithForbiddenError() {
+    public void theSystemShouldBlockTheUserWithForbiddenError() {
         response.then().statusCode(403);
     }
 
-    @And("The response has all the expected fields for the get users endpoint")
-    public void responseHasExpectedFieldsForGetUsersEndpoint() {
+    @And("the http response has all expected fields for get request")
+    public void theHttpResponseHasAllExpectedFieldsForGetRequest() {
         getResponse().as(UserModel[].class);
     }
 

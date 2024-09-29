@@ -5,17 +5,16 @@ import lombok.*;
 
 import java.util.UUID;
 
-@Entity
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
+@Entity(name = "users")
 public class UserEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(name = "name")

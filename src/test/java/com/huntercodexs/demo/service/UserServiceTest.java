@@ -113,15 +113,15 @@ class UserServiceTest {
         when(userRepository.save(any())).thenReturn(userEntityUpdated);
 
         UserModel user = userMapper.toModel(userEntity);
-        user = userService.updateUser(UUID.fromString(USERS[0][0]), user);
+        user = userService.updateUser(UUID.fromString(USERS_UP[0][0]), user);
 
         UserModel finalUser = user;
         assertAll(
-                () -> assertEquals(UUID.fromString(USERS[0][0]), finalUser.getId()),
-                () -> assertEquals(USERS[0][1], finalUser.getName()),
-                () -> assertEquals(USERS[0][2], finalUser.getUsername()),
-                () -> assertEquals(USERS[0][3], finalUser.getPassword()),
-                () -> assertEquals(USERS[0][4], finalUser.getEmail())
+                () -> assertEquals(UUID.fromString(USERS_UP[0][0]), finalUser.getId()),
+                () -> assertEquals(USERS_UP[0][1], finalUser.getName()),
+                () -> assertEquals(USERS_UP[0][2], finalUser.getUsername()),
+                () -> assertEquals(USERS_UP[0][3], finalUser.getPassword()),
+                () -> assertEquals(USERS_UP[0][4], finalUser.getEmail())
         );
     }
 

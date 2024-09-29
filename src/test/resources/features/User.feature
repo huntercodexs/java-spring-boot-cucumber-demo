@@ -1,18 +1,18 @@
 # language: en
 
   @User
-  Feature: Validate the user related endpoints
+  Feature: User endpoint validation
 
-    Background: Set up user
-      Given I add a first user to the DB with username "john@email.com" and password "1234"
+    Background: User setup in database
+      Given the first user is added into database using username "john" and password "1234"
 
-    Scenario: Validate fields for get users endpoint
-      Given I access the get users endpoint
-      And I get a 200 successful response
-      And The response has all the expected fields for the get users endpoint
+    Scenario: First fields validation for get users endpoint
+      Given users endpoint is accessed using get
+      And the result is 200 successful http response
+      And the http response has all expected fields for get request
 
-    Scenario: Validate fields for get users endpoint against
-      Given I access the users DB data
-      Given I access the get users endpoint
-      And I get a 200 successful response
-      And I validate the response for the get users endpoint against the database
+    Scenario: Second fields validation for get users endpoint
+      Given database is accessed
+      Given users endpoint is accessed using get
+      And the result is 200 successful http response
+      And the response is validated again from get users endpoint request

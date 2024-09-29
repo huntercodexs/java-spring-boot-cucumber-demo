@@ -1,7 +1,6 @@
 package com.huntercodexs.demo.test;
 
 import com.huntercodexs.demo.client.DBClient;
-import com.huntercodexs.demo.container.PostgresContainerSettings;
 import com.huntercodexs.demo.model.UserModel;
 import com.huntercodexs.demo.steps.context.UserContext;
 import com.huntercodexs.demo.util.DatabaseUtil;
@@ -27,15 +26,17 @@ import static com.huntercodexs.demo.util.ResourceUtil.getRequestSpecification;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * User endpoint validation
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class UserIntegrationTest extends PostgresContainerSettings {
+//class UserIntegrationTest extends PostgresContainerSettings {
+class UserIntegrationTest {
 
     UserModel firstUser;
     UserModel secondUser;
-    UserContext userContext;
     RequestSpecification request;
-    DatabaseUtil databaseUtil;
 
     @LocalServerPort
     int port;
@@ -43,75 +44,73 @@ class UserIntegrationTest extends PostgresContainerSettings {
     @Autowired
     DBClient dbClient;
 
-    static {
-        postgres = new PostgreSQLContainer<>(DockerImageName
-                .parse(DB_CONTAINER_NAME)
-                .withTag(DB_CONTAINER_VERSION));
-        postgres.start();
-    }
+    @Autowired
+    UserContext userContext;
 
+    @Autowired
+    DatabaseUtil databaseUtil;
+
+//    static {
+//        postgres = new PostgreSQLContainer<>(DockerImageName
+//                .parse(DB_CONTAINER_NAME)
+//                .withTag(DB_CONTAINER_VERSION));
+//        postgres.start();
+//    }
+
+    /**
+     * User setup in database
+     */
     @BeforeAll
     void setUp() {
+
+        //Given the first user is added into database using username "{username}" and password "{password}"
+        databaseUtil.findUserByUsername(USERS[0][2], USERS[0][3]);
+        //databaseUtil.findUserByUsername(USERS[1][2], USERS[1][3]);
+
         Map<String, String> headers = new HashMap<>();
         request = getRequestSpecification()
+                .auth()
+                .basic(USERS[0][2], USERS[0][3])
                 .baseUri(TARGET_PROTOCOL+"://"+TARGET_HOST+":" + port)
                 .contentType(ContentType.JSON)
                 .headers(headers);
-
-        firstUser = createUser(0).as(UserModel.class);
-        secondUser = createUser(1).as(UserModel.class);
-
-        firstUser = new UserModel();
-        secondUser = new UserModel();
-        databaseUtil = new DatabaseUtil();
-
-        userContext.setFirstUserDB(databaseUtil.findUserByUsername(USERS[0][0], USERS[0][1]));
-        userContext.setSecondUserDB(databaseUtil.findUserByUsername(USERS[1][0], USERS[1][1]));
-        userContext.setUserListDB(dbClient.getUsers());
     }
 
+    /**
+     * First fields validation for get users endpoint
+     */
     @Test
     void testValidateFieldsForGetUsersEndpoint() {
-        //Given I access the get users endpoint
+        //Given users endpoint is accessed using get
         Response getUsersResponse = request.get(URI_USERS);
 
-        //And I get a 200 successful response
+        //And the result is 200 successful http response
         assertEquals(200, getUsersResponse.getStatusCode());
 
-        //And The response has all the expected fields for the get users endpoint
+        //the http response has all expected fields for get request
         List<UserModel> userList = Arrays.asList(getUsersResponse.as(UserModel[].class));
         assertThat(userList).usingRecursiveComparison().isEqualTo(List.of(firstUser, secondUser));
     }
 
+    /**
+     * Second fields validation for get users endpoint
+     */
     @Test
     void testValidateFieldsForGetUsersEndpointAgainstDatabase() {
-        //Given I access the users DB data
+        //Given database is accessed
         userContext.setUserListDB(dbClient.getUsers());
 
-        //Given I access the get users endpoint
+        //Given users endpoint is accessed using get
         Response getUsersResponse = request.get(URI_USERS);
 
-        //And I get a 200 successful response
+        //And the result is 200 successful http response
         assertEquals(200, getUsersResponse.getStatusCode());
 
-        //And I validate the response for the get users endpoint against the database
+        //And the response is validated again from get users endpoint request
         assertThat(List.of(firstUser, secondUser))
                 .usingRecursiveComparison()
                 .ignoringFields(IGNORE_FIELDS)
                 .isEqualTo(dbClient.getUsers());
     }
 
-    private Response createUser(int userIndex) {
-        UserModel user = UserModel.builder()
-                .name(USERS[userIndex][0])
-                .username(USERS[userIndex][1])
-                .password(USERS[userIndex][2])
-                .email(USERS[userIndex][3])
-                .build();
-
-        Response response = request.body(user).post(URI_USERS);
-        assertEquals(201, response.getStatusCode());
-
-        return response;
-    }
 }
