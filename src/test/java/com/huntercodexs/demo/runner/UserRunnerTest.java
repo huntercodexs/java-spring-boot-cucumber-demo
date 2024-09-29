@@ -9,5 +9,5 @@ import static io.cucumber.core.options.Constants.GLUE_PROPERTY_NAME;
 @Suite
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.huntercodexs.demo.steps")
-public class DemoApplicationRunnerTest {
+public class UserRunnerTest {
 }

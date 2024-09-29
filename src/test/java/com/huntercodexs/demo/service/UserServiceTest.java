@@ -9,10 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mapstruct.factory.Mappers;
 
 import java.util.*;
 
@@ -20,7 +20,6 @@ import static com.huntercodexs.demo.config.ConstantsConfig.USERS;
 import static com.huntercodexs.demo.config.ConstantsConfig.USERS_UP;
 import static com.huntercodexs.demo.exception.ExceptionEnumerator.USER_NOT_FOUND;
 import static com.huntercodexs.demo.exception.ExceptionEnumerator.getException;
-import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -47,9 +46,9 @@ class UserServiceTest {
         Optional<UserEntity> userEntity = Optional.of(getUserEntityHelper());
         when(userRepository.findById(any())).thenReturn(userEntity);
 
-        UserModel userModel = userService.getUser(randomUUID());
+        UserModel userModel = userService.getUser(UUID.fromString(USERS[0][0]));
         assertAll(
-                () -> assertEquals(UUID.fromString(USERS[0][0]), userModel.getId()),
+                () -> assertEquals(USERS[0][0], userModel.getId().toString()),
                 () -> assertEquals(USERS[0][1], userModel.getName()),
                 () -> assertEquals(USERS[0][2], userModel.getUsername()),
                 () -> assertEquals(USERS[0][3], userModel.getPassword()),
@@ -69,7 +68,7 @@ class UserServiceTest {
 
         UserModel userModel = allUsers.get(0);
         assertAll(
-                () -> assertEquals(UUID.fromString(USERS[0][0]), userModel.getId()),
+                () -> assertEquals(USERS[0][0], userModel.getId().toString()),
                 () -> assertEquals(USERS[0][1], userModel.getName()),
                 () -> assertEquals(USERS[0][2], userModel.getUsername()),
                 () -> assertEquals(USERS[0][3], userModel.getPassword()),
@@ -90,7 +89,7 @@ class UserServiceTest {
 
         UserModel userModel = userService.createUser(userMapper.toModel(userEntity));
         assertAll(
-                () -> assertEquals(UUID.fromString(USERS[0][0]), userModel.getId()),
+                () -> assertEquals(USERS[0][0], userModel.getId().toString()),
                 () -> assertEquals(USERS[0][1], userModel.getName()),
                 () -> assertEquals(USERS[0][2], userModel.getUsername()),
                 () -> assertEquals(USERS[0][3], userModel.getPassword()),
@@ -117,7 +116,7 @@ class UserServiceTest {
 
         UserModel finalUser = user;
         assertAll(
-                () -> assertEquals(UUID.fromString(USERS_UP[0][0]), finalUser.getId()),
+                () -> assertEquals(USERS_UP[0][0], finalUser.getId().toString()),
                 () -> assertEquals(USERS_UP[0][1], finalUser.getName()),
                 () -> assertEquals(USERS_UP[0][2], finalUser.getUsername()),
                 () -> assertEquals(USERS_UP[0][3], finalUser.getPassword()),
@@ -144,13 +143,11 @@ class UserServiceTest {
 
     @Test
     void testDeleteUser_ThrowsExceptionUserNotFound() {
-        UUID userId = randomUUID();
-
         UserNotFoundException exception = assertThrows(UserNotFoundException.class, () ->
-                userService.deleteUser(userId));
+                userService.deleteUser(UUID.fromString(USERS[0][0])));
 
         assertEquals(getException(USER_NOT_FOUND), exception.getMessage());
-        verify(userRepository, never()).deleteById(userId);
+        verify(userRepository, never()).deleteById(UUID.fromString(USERS[0][0]));
     }
 
     private UserEntity getUserEntityHelper() {

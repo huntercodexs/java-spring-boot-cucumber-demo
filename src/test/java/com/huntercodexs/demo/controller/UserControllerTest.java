@@ -43,7 +43,7 @@ class UserControllerTest extends DocumentationConfig {
     UserService userService;
 
     @BeforeAll
-    void initData() {
+    void setup() {
         UserModel userRequest = UserModel.builder()
                 .name(USERS[0][1])
                 .username(USERS[0][2])
@@ -59,13 +59,13 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testGetUser() throws Exception {
+    void getUserTest() throws Exception {
 
         UserModel userModel = this.userResponse;
         when(userService.getUser(UUID.fromString(USERS[0][0]))).thenReturn(userModel);
 
         mockMvc.perform(RestDocumentationRequestBuilders
-                        .get(URI_USERS +"/{userId}", UUID.fromString(USERS[0][0])))
+                        .get(URI_USERS +"/{userId}", USERS[0][0]))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().json(jsonResponse))
                 .andDo(document("get-user", resource("User details")))
@@ -73,7 +73,7 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testGetAllUsers() throws Exception {
+    void getAllUsersTest() throws Exception {
 
         UserModel user = this.userResponse;
         when(userService.getAllUsers()).thenReturn(List.of(user));
@@ -92,7 +92,7 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testCreateUser() throws Exception {
+    void createUserTest() throws Exception {
 
         UserModel userModel = userResponse;
         when(userService.createUser(any())).thenReturn(userModel);
@@ -108,13 +108,13 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testUpdateUser() throws Exception {
+    void updateUserTest() throws Exception {
 
         UserModel userModel = userResponse;
         when(userService.updateUser(any(), any())).thenReturn(userModel);
 
         mockMvc.perform(RestDocumentationRequestBuilders
-                        .put(URI_USERS +"/{userId}", UUID.fromString(USERS[0][0]))
+                        .put(URI_USERS +"/{userId}", USERS[0][0])
                         .content(jsonRequest)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
@@ -124,7 +124,7 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testUpdateUser_ThrowsExceptionWhenUserDoesNotExist() throws Exception {
+    void updateUserThrowsExceptionWhenUserDoesNotExistTest() throws Exception {
 
         when(userService.updateUser(any(), any())).thenThrow(new UserNotFoundException(getException(USER_NOT_FOUND)));
 
@@ -132,10 +132,10 @@ class UserControllerTest extends DocumentationConfig {
         jsonError = jsonError.replace("jsonError", getException(USER_NOT_FOUND));
 
         mockMvc.perform(RestDocumentationRequestBuilders
-                        .put(URI_USERS +"/{userId}", UUID.fromString(USERS[0][0]))
+                        .put(URI_USERS +"/{userId}", USERS[0][0])
                         .content(jsonRequest)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .param("userId", String.valueOf(UUID.fromString(USERS[0][0]))))
+                        .param("userId", String.valueOf(USERS[0][0])))
                 .andExpect(status().is(404))
                 .andExpect(content().json(jsonError))
                 .andDo(document(
@@ -145,9 +145,9 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testDeleteUser() throws Exception {
+    void deleteUserTest() throws Exception {
         mockMvc.perform(RestDocumentationRequestBuilders
-                        .delete(URI_USERS +"/{userId}", UUID.fromString(USERS[0][0]))
+                        .delete(URI_USERS +"/{userId}", USERS[0][0])
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(document("delete-user", resource("User Delete")))
@@ -155,11 +155,11 @@ class UserControllerTest extends DocumentationConfig {
     }
 
     @Test
-    void testDeleteUser_ThrowsExceptionWhenUserNotFound() throws Exception {
+    void deleteUserThrowsExceptionWhenUserNotFoundTest() throws Exception {
         doThrow(new UserNotFoundException(getException(USER_NOT_FOUND))).when(userService).deleteUser(any());
 
         mockMvc.perform(RestDocumentationRequestBuilders
-                        .delete(URI_USERS +"/{userId}", UUID.fromString(USERS[0][0]))
+                        .delete(URI_USERS +"/{userId}", USERS[0][0])
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andDo(document(

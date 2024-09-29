@@ -1,45 +1,61 @@
 package com.huntercodexs.demo.repository;
 
 import com.huntercodexs.demo.entity.UserEntity;
-import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static com.huntercodexs.demo.config.ConstantsConfig.USERS;
 import static com.huntercodexs.demo.config.ConstantsConfig.USERS_UP;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@DataJpaTest
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;
 
-    @Test
-    void testGetUser() {
-
-        UserEntity userEntity = saveUserEntityHelper();
-        userEntity = userRepository.findById(userEntity.getId()).orElse(null);
-
-        assertTrue(userRepository.findAll().size() > 0);
-        assertNotNull(userEntity);
-
-        UserEntity finalUserEntity = userEntity;
-        assertAll(
-                () -> assertEquals(USERS[0][1], finalUserEntity.getName()),
-                () -> assertEquals(USERS[0][2], finalUserEntity.getUsername()),
-                () -> assertEquals(USERS[0][3], finalUserEntity.getPassword()),
-                () -> assertEquals(USERS[0][4], finalUserEntity.getEmail())
-        );
+    private void reset() {
+        try {
+            UserEntity userEntity = userRepository.findByUsername(USERS[0][2]);
+            if (userEntity != null) {
+                userRepository.delete(userEntity);
+            }
+        } catch (RuntimeException re) {
+            System.out.println("USERS NOT FOUND TO DELETE");
+        }
     }
 
+    @Order(1)
     @Test
-    void testEditUser() {
+    void createUserTest() {
 
-        UserEntity userEntity = saveUserEntityHelper();
+        reset();
+        UserEntity userEntity = userEntityToCreate(0);
+        assertNotNull(userEntity);
+
+        userRepository.save(userEntity);
+
+        UserEntity userEntityCheck = userRepository.findByUsername(USERS[0][2]);
+        assertNotNull(userEntityCheck);
+
+        assertAll(
+                () -> assertEquals(USERS[0][1], userEntityCheck.getName()),
+                () -> assertEquals(USERS[0][2], userEntityCheck.getUsername()),
+                () -> assertEquals(USERS[0][3], userEntityCheck.getPassword()),
+                () -> assertEquals(USERS[0][4], userEntityCheck.getEmail())
+        );
+
+    }
+
+    @Order(2)
+    @Test
+    void getUserTest() {
+
+        UserEntity userEntity = userRepository.findByUsername(USERS[0][2]);
         assertNotNull(userEntity);
 
         assertAll(
@@ -48,15 +64,40 @@ class UserRepositoryTest {
                 () -> assertEquals(USERS[0][3], userEntity.getPassword()),
                 () -> assertEquals(USERS[0][4], userEntity.getEmail())
         );
+
+        userRepository.save(userEntity);
     }
 
+    @Order(3)
     @Test
-    void testDeleteUser() {
+    void updateUserTest() {
 
-        UserEntity userEntity = saveUserEntityHelper();
+        UserEntity userEntity = userRepository.findByUsername(USERS[0][2]);
+        assertNotNull(userEntity);
 
-        assertTrue(userRepository.findAll().size() > 0);
-        userEntity = userRepository.findById(userEntity.getId()).orElse(null);
+        userEntity.setName(USERS_UP[0][1]);
+        userEntity.setUsername(USERS_UP[0][2]);
+        userEntity.setPassword(USERS_UP[0][3]);
+        userEntity.setEmail(USERS_UP[0][4]);
+
+        userRepository.save(userEntity);
+
+        UserEntity userEntityCheck = userRepository.findByUsername(USERS_UP[0][2]);
+        assertNotNull(userEntityCheck);
+
+        assertAll(
+                () -> assertEquals(USERS_UP[0][1], userEntityCheck.getName()),
+                () -> assertEquals(USERS_UP[0][2], userEntityCheck.getUsername()),
+                () -> assertEquals(USERS_UP[0][3], userEntityCheck.getPassword()),
+                () -> assertEquals(USERS_UP[0][4], userEntityCheck.getEmail())
+        );
+    }
+
+    @Order(4)
+    @Test
+    void deleteUserTest() {
+
+        UserEntity userEntity = userRepository.findByUsername(USERS[0][2]);
         assertNotNull(userEntity);
 
         userRepository.delete(userEntity);
@@ -64,37 +105,14 @@ class UserRepositoryTest {
         assertTrue(userRepository.findById(userEntity.getId()).isEmpty());
     }
 
-    @NotNull
-    private UserEntity saveUserEntityHelper() {
+    private UserEntity userEntityToCreate(int userIndex) {
 
-        //TODO: Check this logic and functionality, looks like confusing
-        UserEntity userFromEntity = UserEntity.builder().name("anySender").build();
-
-        UserEntity userToEntity = UserEntity.builder().name("anyReceiver").build();
-
-        userRepository.save(userFromEntity);
-        userRepository.save(userToEntity);
-
-        UserEntity userEntity = UserEntity.builder()
-                .name(USERS[0][1])
-                .username(USERS[0][2])
-                .password(USERS[0][3])
-                .email(USERS[0][4])
+        return UserEntity.builder()
+                .name(USERS[userIndex][1])
+                .username(USERS[userIndex][2])
+                .password(USERS[userIndex][3])
+                .email(USERS[userIndex][4])
                 .build();
-
-        userEntity = userRepository.save(userEntity);
-
-        return userEntity;
     }
 
-    @NotNull
-    private UserEntity getUpdatedUserEntityHelper(UserEntity userEntity) {
-        userEntity.setName(USERS_UP[0][0]);
-        userEntity.setUsername(USERS_UP[0][2]);
-        userEntity.setPassword(USERS_UP[0][3]);
-        userEntity.setEmail(USERS_UP[0][4]);
-
-        userEntity = userRepository.save(userEntity);
-        return userEntity;
-    }
 }

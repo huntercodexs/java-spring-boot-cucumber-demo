@@ -1,6 +1,7 @@
-package com.huntercodexs.demo.test;
+package com.huntercodexs.demo.integration;
 
 import com.huntercodexs.demo.client.DBClient;
+import com.huntercodexs.demo.mapper.UserMapper;
 import com.huntercodexs.demo.model.UserModel;
 import com.huntercodexs.demo.steps.context.UserContext;
 import com.huntercodexs.demo.util.DatabaseUtil;
@@ -13,8 +14,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.utility.DockerImageName;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,6 +49,9 @@ class UserIntegrationTest {
     @Autowired
     DatabaseUtil databaseUtil;
 
+    @Autowired
+    UserMapper userMapper;
+
 //    static {
 //        postgres = new PostgreSQLContainer<>(DockerImageName
 //                .parse(DB_CONTAINER_NAME)
@@ -64,8 +66,8 @@ class UserIntegrationTest {
     void setUp() {
 
         //Given the first user is added into database using username "{username}" and password "{password}"
-        databaseUtil.findUserByUsername(USERS[0][2], USERS[0][3]);
-        //databaseUtil.findUserByUsername(USERS[1][2], USERS[1][3]);
+        firstUser = userMapper.toModel(databaseUtil.findUserByUsername(USERS[0][2], USERS[0][3], 0));
+        secondUser = userMapper.toModel(databaseUtil.findUserByUsername(USERS[1][2], USERS[1][3], 1));
 
         Map<String, String> headers = new HashMap<>();
         request = getRequestSpecification()
@@ -98,7 +100,7 @@ class UserIntegrationTest {
     @Test
     void testValidateFieldsForGetUsersEndpointAgainstDatabase() {
         //Given database is accessed
-        userContext.setUserListDB(dbClient.getUsers());
+        //userContext.setUserListDB(dbClient.getUsers());
 
         //Given users endpoint is accessed using get
         Response getUsersResponse = request.get(URI_USERS);

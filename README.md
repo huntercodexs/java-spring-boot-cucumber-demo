@@ -13,10 +13,10 @@ Simple repository to demonstrate Java Spring Boot + Cucumber
 
 - Cucumber - OK
 - Runner - OK
-- DB - 
-- API -
-- Unitary -
-- Integration -
-- JUnit -
+- JUnit - OK
+- API/Controller - OK
+- DB/Repository - OK
+- Unitary - OK
+- Integration - OK
 - Container -
 - Pact Broker - 

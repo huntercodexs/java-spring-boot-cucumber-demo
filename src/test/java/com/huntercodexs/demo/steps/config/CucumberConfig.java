@@ -15,7 +15,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @CucumberContextConfiguration
 @SpringBootTest(classes = TestConfig.class, webEnvironment = RANDOM_PORT)
 //public class CucumberSpringConfiguration extends PostgresContainerSettings {
-public class CucumberSpringConfiguration {
+public class CucumberConfig {
 
     @LocalServerPort
     int port;

@@ -15,25 +15,22 @@ public class DatabaseUtil {
     @Autowired
     UserRepository userRepository;
 
-    public UserEntity findUserByUsername(String username, String password) {
+    public UserEntity findUserByUsername(String username, String password, int userIndex) {
         UserEntity userEntity = userRepository.findByUsername(username);
 
         if (userEntity == null) {
-            userEntity = getUserEntity();
-            userEntity.setUsername(username);
-            userEntity.setPassword(password);
-            userEntity = userRepository.save(userEntity);
+            userEntity = userRepository.save(getUserEntity(userIndex));
         }
 
         return userEntity;
     }
 
-    private UserEntity getUserEntity() {
+    private UserEntity getUserEntity(int userIndex) {
         return UserEntity.builder()
-                .name(USERS[0][1])
-                .username(USERS[0][2])
-                .password(USERS[0][3])
-                .email(USERS[0][4])
+                .name(USERS[userIndex][1])
+                .username(USERS[userIndex][2])
+                .password(USERS[userIndex][3])
+                .email(USERS[userIndex][4])
                 .build();
     }
 

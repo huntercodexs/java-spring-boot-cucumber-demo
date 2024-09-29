@@ -11,14 +11,14 @@ public class ConstantsConfig {
 
     //USERS INITIAL
     public final static String[][] USERS = new String[][]{
-            new String[]{"27f18116-0ceb-4b34-8a2f-210747d25506", "John Smith", "john", "1234", "john@email.com"},
-            new String[]{"8db7eefa-410e-40d6-94f4-f1d01fde1b06", "Mary Smith", "mary", "1234", "mary@email.com"}
+            new String[]{"e1ba320c-182b-4a98-b7ba-0ddb9c478374","John Smith", "john", "1234", "john@email.com"},
+            new String[]{"0c2548b1-ad45-4fb6-8edb-d1c2885df455","Mary Smith", "mary", "1234", "mary@email.com"}
     };
 
     //USERS UPDATE
     public final static String[][] USERS_UP = new String[][]{
-            new String[]{"27f18116-0ceb-4b34-8a2f-210747d25506", "John Smith UP", "john", "1234", "john.up@email.com"},
-            new String[]{"8db7eefa-410e-40d6-94f4-f1d01fde1b06", "Mary Smith UP", "mary", "1234", "mary.up@email.com"}
+            new String[]{"e1ba320c-182b-4a98-b7ba-0ddb9c478374","John Smith UP", "john", "1234", "john.up@email.com"},
+            new String[]{"0c2548b1-ad45-4fb6-8edb-d1c2885df455","Mary Smith UP", "mary", "1234", "mary.up@email.com"}
     };
 
     //BROKE
