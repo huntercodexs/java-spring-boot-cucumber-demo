@@ -54,7 +54,7 @@ class UserIntegrationTest extends PostgresContainerSettings {
     void setUp() {
         Map<String, String> headers = new HashMap<>();
         request = getRequestSpecification()
-                .baseUri("http://localhost:" + port)
+                .baseUri(TARGET_PROTOCOL+"://"+TARGET_HOST+":" + port)
                 .contentType(ContentType.JSON)
                 .headers(headers);
 

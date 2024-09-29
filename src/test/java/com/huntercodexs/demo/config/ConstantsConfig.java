@@ -1,13 +1,11 @@
 package com.huntercodexs.demo.config;
 
-import java.util.UUID;
-
 public class ConstantsConfig {
     //GENERIC
-    public static final String PROTOCOL = "http";
-    public static final String APP_HOST = "localhost";
+    public static final String TARGET_PROTOCOL = "http";
+    public static final String TARGET_HOST = "localhost";
     public static final int DEF_PORT = 8080;
-    public static final String ENV = "dev";
+    public static final String PROFILE = "dev";
     public static final String URI_USERS = "/api/v1/demo/users";
     public static final String IGNORE_FIELDS = "";
 

@@ -29,7 +29,8 @@ public class PostgresConfig {
                     String.format("spring.datasource.url=%s", postgres.getJdbcUrl()),
                     String.format("spring.datasource.hikari.jdbc-url=%s", postgres.getJdbcUrl()),
                     String.format("spring.datasource.username=%s", postgres.getUsername()),
-                    String.format("spring.datasource.password=%s", postgres.getPassword())).applyTo(applicationContext);
+                    String.format("spring.datasource.password=%s", postgres.getPassword())
+            ).applyTo(applicationContext);
 
         }
     }

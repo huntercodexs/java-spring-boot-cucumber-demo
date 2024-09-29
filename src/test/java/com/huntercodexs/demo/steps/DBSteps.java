@@ -15,7 +15,7 @@ public class DBSteps {
     private final UserContext userContext;
     private final DatabaseUtil databaseUtil;
 
-    @Given("I add a user to the DB with username {string} and password {string}")
+    @Given("I add a first user to the DB with username {string} and password {string}")
     public void iAddUserToDB(String username, String password) {
         userContext.setFirstUserDB(databaseUtil.findUserByUsername(username, password));
     }

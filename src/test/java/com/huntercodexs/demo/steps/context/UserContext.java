@@ -15,9 +15,7 @@ import java.util.List;
 @Component
 @ScenarioScope
 public class UserContext {
-
-    private List<UserEntity> userListDB;
     private UserEntity firstUserDB;
     private UserEntity secondUserDB;
-
+    private List<UserEntity> userListDB;
 }

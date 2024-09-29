@@ -53,7 +53,7 @@ class PactProviderIntegrationTest extends PostgresContainerSettings {
         Map<String, String> headers = new HashMap<>();
 
         rq = getRequestSpecification()
-                .baseUri("http://localhost:" + port)
+                .baseUri(TARGET_PROTOCOL+"://"+TARGET_HOST+":" + port)
                 .contentType(ContentType.JSON)
                 .auth()
                 .basic(PACT_USERNAME, PACT_PASSWORD)
@@ -69,13 +69,13 @@ class PactProviderIntegrationTest extends PostgresContainerSettings {
                 .encodeToString((PACT_USERNAME + ":" + PACT_PASSWORD).getBytes(StandardCharsets.UTF_8));
 
         request.addHeader("Authorization", "Basic " + encoded);
-        logCurlFromPact(context, request, "http://localhost:" + port);
+        logCurlFromPact(context, request, TARGET_PROTOCOL+"://"+TARGET_HOST+":" + port);
         context.verifyInteraction();
     }
 
     @BeforeEach
     void before(PactVerificationContext context) {
-        context.setTarget(new HttpTestTarget("localhost", port, ""));
+        context.setTarget(new HttpTestTarget(TARGET_HOST, port, ""));
     }
 
     @State("A request to retrieve a user")

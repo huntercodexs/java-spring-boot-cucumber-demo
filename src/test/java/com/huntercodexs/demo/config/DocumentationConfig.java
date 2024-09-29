@@ -22,8 +22,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 
-@ExtendWith({RestDocumentationExtension.class, SpringExtension.class, MockitoExtension.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class, MockitoExtension.class})
 public abstract class DocumentationConfig {
 
     @Autowired
@@ -37,8 +37,8 @@ public abstract class DocumentationConfig {
                         preprocessRequest(prettyPrint()), preprocessResponse(prettyPrint())))
                 .apply(MockMvcRestDocumentation.documentationConfiguration(restDocumentation)
                         .uris()
-                        .withScheme(PROTOCOL)
-                        .withHost(APP_HOST)
+                        .withScheme(TARGET_PROTOCOL)
+                        .withHost(TARGET_HOST)
                         .withPort(DEF_PORT)
                         .and().snippets()
                         .withDefaults(CliDocumentation.curlRequest(),

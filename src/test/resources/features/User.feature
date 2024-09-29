@@ -4,7 +4,7 @@
   Feature: Validate the user related endpoints
 
     Background: Set up user
-      Given I add a user to the DB with username "mary@email.com" and password "Password123!"
+      Given I add a first user to the DB with username "john@email.com" and password "1234"
 
     Scenario: Validate fields for get users endpoint
       Given I access the get users endpoint

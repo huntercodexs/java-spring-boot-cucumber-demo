@@ -13,8 +13,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import static com.huntercodexs.demo.config.ConstantsConfig.DB_PASSWORD;
-import static com.huntercodexs.demo.config.ConstantsConfig.DB_USERNAME;
+import static com.huntercodexs.demo.config.ConstantsConfig.*;
 
 @Data
 @Getter
@@ -28,13 +27,12 @@ public class ApiSteps {
 
     @Given("I access the get users endpoint")
     public void iAccessGetUsersEndpoint() {
-
         RequestSpecification rq = restClient
                 .getRequestSpecification()
                 .auth()
-                .basic(DB_USERNAME, DB_PASSWORD);
+                .basic(USERS[0][1], USERS[0][1]);
 
-        setResponse(rq.get("/api/v1/demo/users/"));
+        setResponse(rq.get(URI_USERS));
     }
 
     @Then("^I get a (\\d+) (successful|error) response$")
@@ -68,11 +66,17 @@ public class ApiSteps {
     }
 
     public RequestSpecification getRqWithAuth() {
-        return restClient.getRequestSpecification().auth().basic(userContext.getFirstUserDB().getUsername(), userContext.getFirstUserDB().getPassword());
+        return restClient.getRequestSpecification()
+                .auth()
+                .basic(
+                        userContext.getFirstUserDB().getUsername(),
+                        userContext.getFirstUserDB().getPassword());
     }
 
     public RequestSpecification getRqWithAuth(String username, String password) {
-        return restClient.getRequestSpecification().auth().basic(username, password);
+        return restClient.getRequestSpecification()
+                .auth()
+                .basic(username, password);
     }
 
 }

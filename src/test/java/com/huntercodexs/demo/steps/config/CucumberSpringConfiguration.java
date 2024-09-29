@@ -8,17 +8,17 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 
-import static com.huntercodexs.demo.config.ConstantsConfig.ENV;
+import static com.huntercodexs.demo.config.ConstantsConfig.PROFILE;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@Profile(ENV)
-@ActiveProfiles(ENV)
+@Profile(PROFILE)
+@ActiveProfiles(PROFILE)
 @CucumberContextConfiguration
 @SpringBootTest(classes = TestConfig.class, webEnvironment = RANDOM_PORT)
 public class CucumberSpringConfiguration extends PostgresContainerSettings {
 
     @LocalServerPort
-    private int port;
+    int port;
 
     @PostConstruct
     public void setup() {

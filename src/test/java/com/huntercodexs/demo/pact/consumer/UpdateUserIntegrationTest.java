@@ -36,7 +36,7 @@ class UpdateUserIntegrationTest {
                 .stringType("password", USERS[0][3])
                 .stringType("email", USERS[0][4])
                 .uuid("id", USERS[0][0])
-                .closeArray()
+                //.closeArray()
                 .close();
 
         DslPart bodyReturned = new PactDslJsonBody()
@@ -45,7 +45,7 @@ class UpdateUserIntegrationTest {
                 .stringType("username", USERS[0][2])
                 .stringType("password", USERS[0][3])
                 .stringType("email", USERS[0][4])
-                .closeArray()
+                //.closeArray()
                 .close();
 
         return builder

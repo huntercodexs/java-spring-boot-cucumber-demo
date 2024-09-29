@@ -2,10 +2,14 @@ package com.huntercodexs.demo.util;
 
 import com.huntercodexs.demo.entity.UserEntity;
 import com.huntercodexs.demo.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import static com.huntercodexs.demo.config.ConstantsConfig.USERS;
 
+@Component
+@RequiredArgsConstructor
 public class DatabaseUtil {
 
     @Autowired

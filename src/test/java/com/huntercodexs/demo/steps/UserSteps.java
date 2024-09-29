@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static com.huntercodexs.demo.config.ConstantsConfig.IGNORE_FIELDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Data
@@ -33,7 +34,7 @@ public class UserSteps {
 
                 assertThat(userApi)
                         .usingRecursiveComparison()
-                        .ignoringFields("hometown", "hobbyAndInterests", "followerOf", "followedBy")
+                        .ignoringFields(IGNORE_FIELDS)
                         .isEqualTo(userDB);
             }
         }

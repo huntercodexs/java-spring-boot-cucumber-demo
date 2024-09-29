@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class Utils {
+public final class ApplicationUtil {
 
     public static String jsonStringFromObject(Object jsonObject) {
         if (jsonObject == null) {
