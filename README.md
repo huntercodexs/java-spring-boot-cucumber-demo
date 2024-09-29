@@ -10,3 +10,14 @@ Simple repository to demonstrate Java Spring Boot + Cucumber
 - Postgres
 
 ### Overview
+
+
+### Included Tests
+
+- JUnit Tests
+- Cucumber Tests
+- Container Tests
+- DB Tests
+- API Tests
+- Integration Tests
+- Unitary Tests

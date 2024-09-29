@@ -42,8 +42,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS)
                         .permitAll()
                         .anyRequest()
-                        .authenticated())
-                .httpBasic(withDefaults());
+                        .permitAll());
+                        //.authenticated()
+                        //).httpBasic(withDefaults());
         return http.build();
     }
 
