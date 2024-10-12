@@ -164,7 +164,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--Junit-->
+		<!--Pact Broker-->
 		<dependency>
 			<groupId>au.com.dius.pact.consumer</groupId>
 			<artifactId>junit5</artifactId>
@@ -177,6 +177,8 @@
 			<version>${pact.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!--Junit-->
 		<dependency>
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-suite</artifactId>
