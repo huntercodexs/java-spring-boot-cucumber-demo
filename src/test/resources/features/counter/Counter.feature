@@ -2,6 +2,7 @@
 
   Feature: Counter from 3 to 0 to start any job
 
+    @Counter
     Scenario Outline: BackendCallsCounter
       Given the clients needs to start one specific job
       When the client calls endpoint <endpoint> passing argument value <value>

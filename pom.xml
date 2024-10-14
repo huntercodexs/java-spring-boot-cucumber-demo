@@ -28,11 +28,42 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--Lombok-->
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!--PROJECT REACTOR-->
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<!--Lombok-->
+		<!--<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>-->
+
+		<!--Junit-Tests-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>compile</scope>
 		</dependency>
 
 		<!--Cucumber-->
@@ -61,25 +92,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--CUCUMBER REPORT-->
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.13.0</version>
+			<scope>compile</scope>
+		</dependency>
+
 		<!--Selenium-->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>3.13.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!--Junit-Tests-->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -114,14 +139,67 @@
 
 	<build>
 		<plugins>
+
+			<!--Generate Final Jar with all dependency-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<configuration>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--Generate Jar file with the class main-->
+			<!--<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
+				<configuration>
+					<mainClass>com.huntercodexs.codexstester.SampleApplication</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>-->
+
+			<!--Generate Reports: extentreports-cucumber7-adapter-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<testSourceDirectory>src/test/java</testSourceDirectory>
+					<!-- Set the test source directory -->
+					<testSourceDirectory>src/test/java/com/huntercodexs/javaspringbootcucumber</testSourceDirectory>
+					<trimStackTrace>false</trimStackTrace>
 					<excludes>
-						<exclude>**/CucumberTestRunner.java</exclude>
+						<exclude>**/*Integration.java</exclude>
 					</excludes>
+					<systemPropertyVariables>
+						<extent.reporter.html.start>true</extent.reporter.html.start>
+						<!-- Specify the output path for the HTML report -->
+						<extent.reporter.html.out>
+							target/cucumber-reports/ApplicationTestReport.html
+						</extent.reporter.html.out>
+						<!-- Specify the Extent configuration file -->
+						<extent.reporter.html.config>
+							src/test/resources/reporting/extent-config.xml
+						</extent.reporter.html.config>
+						<!-- Enable quiet mode to suppress console logs -->
+						<cucumber.publish.quiet>true</cucumber.publish.quiet>
+					</systemPropertyVariables>
+					<argLine>
+						--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED
+					</argLine>
 				</configuration>
 				<executions>
 					<execution>
@@ -135,31 +213,13 @@
 								<exclude>none</exclude>
 							</excludes>
 							<includes>
-								<include>**/CucumberSuite.java</include>
+								<include>**/*Integration.java</include>
 							</includes>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
 		</plugins>
 	</build>
 

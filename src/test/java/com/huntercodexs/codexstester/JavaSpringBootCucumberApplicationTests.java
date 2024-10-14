@@ -1,4 +1,4 @@
-package com.huntercodexs.javaspringbootcucumber;
+package com.huntercodexs.codexstester;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.huntercodexs.javaspringbootcucumber.cucumber.definition;
+package com.huntercodexs.codexstester.bdd.stepsdef;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
