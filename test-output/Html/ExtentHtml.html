@@ -49,7 +49,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Oct 14, 2024 11:43:41 AM</span>
+			<span class='label blue darken-3 suite-start-time'>Oct 14, 2024 01:35:41 PM</span>
 			</a>
 		</ul>
 	</div>
@@ -76,9 +76,7 @@
 				<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@FinalValidation</a></li>
-					<li><a href='#'>@InitialValidation</a></li>
-					<li><a href='#'>@BackgroundUser</a></li>
+					<li><a href='#'>@Things</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -139,7 +137,7 @@
                 </div>
                 <div class='block text-small'>
                     <span class='tooltipped' data-position='top' data-tooltip='100%'>
-                    <span class='strong'>2</span> scenarios passed</span>
+                    <span class='strong'>1</span> scenarios passed</span>
                 </div>
                 <div class='block text-small'>
                     <span class='strong tooltipped' data-position='top' data-tooltip='0%'>
@@ -159,7 +157,7 @@
                 </div>
                 <div class='block text-small'>
                     <span class='tooltipped' data-position='top' data-tooltip='100%'>
-                    <span class='strong'>9</span> steps passed</span>
+                    <span class='strong'>4</span> steps passed</span>
                 </div>
                 <div class='block text-small'>
                     <span class='strong tooltipped' data-position='top' data-tooltip='0%'>
@@ -188,8 +186,8 @@
 			<ul id='test-collection' class='test-collection'>
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>User endpoint validation</span>
-						<span class='test-time'>Oct 14, 2024 11:43:43 AM</span>
+						<span class='test-name'>For List Example</span>
+						<span class='test-time'>Oct 14, 2024 01:35:44 PM</span>
 						<span class='test-status right pass'>Pass</span>
 					</div>
 					<div class='test-content hide'>
@@ -202,76 +200,37 @@
 
 <div class='scenario node' test-id='2' status='pass'>
 
-	<span class='duration right label'>00 00 00.014</span>
+	<span class='duration right label'>00 00 00.013</span>
 	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: First fields validation for get users endpoint</div>
+		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Testing List</div>
 	</div>
 	
 	
 		<div class='category-list'>
-				<span class='category label'>@BackgroundUser</span>
-				<span class='category label'>@InitialValidation</span>
+				<span class='category label'>@Things</span>
 		</div>
 	
 	<ul class='steps'>
 		<li test-id='3' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.addingFirstUserIntoDatabase(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given the first user is added into database using username "john" and password "1234"</div>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.ListSteps.theFollowingAnimals(java.util.List<java.lang.String>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given the following animals:</div>
 
 
+					<div class="node-step"><table class='markup-table table '><tr><td>cow</td></tr><tr><td>horse</td></tr><tr><td>sheep</td></tr><tr><td>dog</td></tr></table></div>
 		</li>
-		<li test-id='4' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.usersEndpointIsAccessedUsingGet())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given users endpoint is accessed using get</div>
+		<li test-id='4' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.ListSteps.theFollowingFruits(java.util.List<java.lang.String>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the following fruits:</div>
 
 
+					<div class="node-step"><table class='markup-table table '><tr><td>apple</td></tr><tr><td>banana</td></tr><tr><td>grape</td></tr><tr><td>lime</td></tr></table></div>
 		</li>
 		<li test-id='5' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theResultIsSuccessfulOrErrorFromHttpResponse(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the result is 200 successful http response</div>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.ListSteps.theFollowingNames(java.util.List<java.lang.String>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the following names:</div>
 
 
+					<div class="node-step"><table class='markup-table table '><tr><td>john</td></tr><tr><td>mary</td></tr><tr><td>jenny</td></tr><tr><td>luis</td></tr></table></div>
 		</li>
-		<li test-id='6' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theHttpResponseHasAllExpectedFieldsForGetRequest())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the http response has all expected fields for get request</div>
-
-
-		</li>
-	</ul>
-</div>
-<div class='scenario node' test-id='7' status='pass'>
-
-	<span class='duration right label'>00 00 00.003</span>
-	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Second fields validation for get users endpoint</div>
-	</div>
-	
-	
-		<div class='category-list'>
-				<span class='category label'>@BackgroundUser</span>
-				<span class='category label'>@FinalValidation</span>
-		</div>
-	
-	<ul class='steps'>
-		<li test-id='8' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.addingFirstUserIntoDatabase(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given the first user is added into database using username "john" and password "1234"</div>
-
-
-		</li>
-		<li test-id='9' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.databaseIsAccessed())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given database is accessed</div>
-
-
-		</li>
-		<li test-id='10' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.usersEndpointIsAccessedUsingGet())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given users endpoint is accessed using get</div>
-
-
-		</li>
-		<li test-id='11' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theResultIsSuccessfulOrErrorFromHttpResponse(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the result is 200 successful http response</div>
-
-
-		</li>
-		<li test-id='12' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundUserSteps.theResponseIsValidatedAgainFromGetUsersEndpointRequest())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the response is validated again from get users endpoint request</div>
+		<li test-id='6' class='node then Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.ListSteps.showAllDataTogether())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then show all data together</div>
 
 
 		</li>
@@ -321,7 +280,7 @@
 			<ul id='category-collection' class='category-collection'>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@FinalValidation</span>
+						<span class='category-name'>@Things</span>
 						<span class='category-status right'>
 						<span class='label pass'>1</span>
 						</span>
@@ -343,79 +302,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Oct 14, 2024 11:43:43 AM</td>
-										<td class='linked' test-id='7'>Second fields validation for get users endpoint</td>
-										<td><span class='test-status Pass'>Pass</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@InitialValidation</span>
-						<span class='category-status right'>
-						<span class='label pass'>1</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							<span status="pass" class='label green accent-4 white-text'>Passed: 1</span>
-							
-							
-						</div>
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Oct 14, 2024 11:43:43 AM</td>
-										<td class='linked' test-id='2'>First fields validation for get users endpoint</td>
-										<td><span class='test-status Pass'>Pass</span></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</li>
-				<li class='category displayed active'>
-					<div class='category-heading'>
-						<span class='category-name'>@BackgroundUser</span>
-						<span class='category-status right'>
-						<span class='label pass'>2</span>
-						</span>
-					</div>
-					<div class='category-content hide'>
-						<div class='category-status-counts'>
-							<span status="pass" class='label green accent-4 white-text'>Passed: 2</span>
-							
-							
-						</div>
-						<div class='category-tests'>
-							<table class='bordered table-results'>
-								<thead>
-									<tr>
-										<th>Timestamp</th>
-										<th>TestName</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Oct 14, 2024 11:43:43 AM</td>
-										<td class='linked' test-id='2'>First fields validation for get users endpoint</td>
-										<td><span class='test-status Pass'>Pass</span></td>
-									</tr>
-									<tr>
-										<td>Oct 14, 2024 11:43:43 AM</td>
-										<td class='linked' test-id='7'>Second fields validation for get users endpoint</td>
+										<td>Oct 14, 2024 01:35:44 PM</td>
+										<td class='linked' test-id='2'>Testing List</td>
 										<td><span class='test-status Pass'>Pass</span></td>
 									</tr>
 								</tbody>
@@ -446,31 +334,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Scenarios
-					<div class='panel-lead'>2</div>
+					<div class='panel-lead'>1</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>9</div>
+					<div class='panel-lead'>4</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Oct 14, 2024 11:43:41 AM</div>
+					<div class='panel-lead'>Oct 14, 2024 01:35:41 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Oct 14, 2024 11:43:43 AM</div>
+			 		<div class='panel-lead'>Oct 14, 2024 01:35:44 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>00 00 02.535</div>
+					<div class='panel-lead'>00 00 02.558</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -506,26 +394,8 @@
 							<th>Passed %</th>
 						</tr>
 						<tr>
-							<td>@FinalValidation</td>
+							<td>@Things</td>
 							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-							<td>
-									100%
-							</td>
-						</tr>
-						<tr>
-							<td>@InitialValidation</td>
-							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-							<td>
-									100%
-							</td>
-						</tr>
-						<tr>
-							<td>@BackgroundUser</td>
-							<td>2</td>
 							<td>0</td>
 							<td>0</td>
 							<td>
@@ -550,16 +420,16 @@
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				childCount: 2,
-				passChild: 2,
+				childCount: 1,
+				passChild: 1,
 				failChild: 0,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				grandChildCount: 9,
-				passGrandChild: 9,
+				grandChildCount: 4,
+				passGrandChild: 4,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
@@ -571,7 +441,7 @@
 		
 		<script>
 			var timeline = {
-			        "User endpoint validation":0.036
+			        "For List Example":0.015
 			};
 		</script>
 		
