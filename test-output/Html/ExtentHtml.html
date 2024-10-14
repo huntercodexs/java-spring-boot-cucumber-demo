@@ -49,7 +49,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>Oct 14, 2024 10:53:57 AM</span>
+			<span class='label blue darken-3 suite-start-time'>Oct 14, 2024 11:43:41 AM</span>
 			</a>
 		</ul>
 	</div>
@@ -76,8 +76,9 @@
 				<i class='material-icons'>local_offer</i> Category
 				</a>
 				<ul id='category-toggle' class='dropdown-content'>
-					<li><a href='#'>@EmployeeOK</a></li>
-					<li><a href='#'>@EmployeeNOK</a></li>
+					<li><a href='#'>@FinalValidation</a></li>
+					<li><a href='#'>@InitialValidation</a></li>
+					<li><a href='#'>@BackgroundUser</a></li>
 					<li class='divider'></li>
 					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
 				</ul>
@@ -158,7 +159,7 @@
                 </div>
                 <div class='block text-small'>
                     <span class='tooltipped' data-position='top' data-tooltip='100%'>
-                    <span class='strong'>8</span> steps passed</span>
+                    <span class='strong'>9</span> steps passed</span>
                 </div>
                 <div class='block text-small'>
                     <span class='strong tooltipped' data-position='top' data-tooltip='0%'>
@@ -187,8 +188,8 @@
 			<ul id='test-collection' class='test-collection'>
 				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Employee Handling</span>
-						<span class='test-time'>Oct 14, 2024 10:54:00 AM</span>
+						<span class='test-name'>User endpoint validation</span>
+						<span class='test-time'>Oct 14, 2024 11:43:43 AM</span>
 						<span class='test-status right pass'>Pass</span>
 					</div>
 					<div class='test-content hide'>
@@ -201,36 +202,35 @@
 
 <div class='scenario node' test-id='2' status='pass'>
 
-	<span class='duration right label'>00 00 00.025</span>
+	<span class='duration right label'>00 00 00.014</span>
 	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Create Employee using all required fields</div>
+		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: First fields validation for get users endpoint</div>
 	</div>
 	
 	
 		<div class='category-list'>
-				<span class='category label'>@EmployeeOK</span>
+				<span class='category label'>@BackgroundUser</span>
+				<span class='category label'>@InitialValidation</span>
 		</div>
 	
 	<ul class='steps'>
 		<li test-id='3' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.userWantsToCreateAnEmployeeUsingTheFollowingAttributes(java.util.List<com.huntercodexs.javaspringbootcucumber.dto.Employee>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user wants to create an employee using the following attributes</div>
-
-
-					<div class="node-step"><table class='markup-table table '><tr><td>id</td><td>firstName</td><td>lastName</td><td>dateOfBirth</td><td>startDate</td><td>endDate</td><td>employmentType</td><td>email</td></tr><tr><td>1</td><td>John</td><td>Smith</td><td>1988-08-30</td><td>2001-11-05</td><td></td><td>Contract</td><td>john.smith@email.com</td></tr></table></div>
-		</li>
-		<li test-id='4' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.withTheFollowingAddressInformation(java.util.List<com.huntercodexs.javaspringbootcucumber.dto.EmployeeAddress>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And with the following address information</div>
-
-
-					<div class="node-step"><table class='markup-table table '><tr><td>id</td><td>street</td><td>city</td><td>number</td><td>state</td></tr><tr><td>1</td><td>Street One Test</td><td>New York</td><td>100</td><td></td></tr><tr><td>2</td><td>Street Two Test</td><td>Springfield</td><td>200</td><td>Ohio</td></tr></table></div>
-		</li>
-		<li test-id='5' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.userTryToSaveTheNewEmployeeUsingAllRequiredFields(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user try to save the new employee 'using all required fields'</div>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.addingFirstUserIntoDatabase(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given the first user is added into database using username "john" and password "1234"</div>
 
 
 		</li>
-		<li test-id='6' class='node then Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.theResultIsSuccessfulAndResponseIs(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then the result is 'successful' and response is ''</div>
+		<li test-id='4' class='node given Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.usersEndpointIsAccessedUsingGet())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given users endpoint is accessed using get</div>
+
+
+		</li>
+		<li test-id='5' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theResultIsSuccessfulOrErrorFromHttpResponse(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the result is 200 successful http response</div>
+
+
+		</li>
+		<li test-id='6' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theHttpResponseHasAllExpectedFieldsForGetRequest())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the http response has all expected fields for get request</div>
 
 
 		</li>
@@ -238,36 +238,40 @@
 </div>
 <div class='scenario node' test-id='7' status='pass'>
 
-	<span class='duration right label'>00 00 00.004</span>
+	<span class='duration right label'>00 00 00.003</span>
 	<div class="bdd-test">
-		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Create Employee forgetting firstName</div>
+		<div class="scenario-name"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span> Scenario: Second fields validation for get users endpoint</div>
 	</div>
 	
 	
 		<div class='category-list'>
-				<span class='category label'>@EmployeeNOK</span>
+				<span class='category label'>@BackgroundUser</span>
+				<span class='category label'>@FinalValidation</span>
 		</div>
 	
 	<ul class='steps'>
 		<li test-id='8' class='node given Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.userWantsToCreateAnEmployeeUsingTheFollowingAttributes(java.util.List<com.huntercodexs.javaspringbootcucumber.dto.Employee>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given user wants to create an employee using the following attributes</div>
-
-
-					<div class="node-step"><table class='markup-table table '><tr><td>id</td><td>firstName</td><td>lastName</td><td>dateOfBirth</td><td>startDate</td><td>endDate</td><td>employmentType</td><td>email</td></tr><tr><td>1</td><td></td><td>Smith</td><td>1988-08-30</td><td>2001-11-05</td><td></td><td>Contract</td><td>john.smith@email.com</td></tr></table></div>
-		</li>
-		<li test-id='9' class='node and Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.withTheFollowingAddressInformation(java.util.List<com.huntercodexs.javaspringbootcucumber.dto.EmployeeAddress>))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And with the following address information</div>
-
-
-					<div class="node-step"><table class='markup-table table '><tr><td>id</td><td>street</td><td>city</td><td>number</td><td>state</td></tr><tr><td>1</td><td>Street One Test</td><td>New York</td><td>100</td><td></td></tr><tr><td>2</td><td>Street Two Test</td><td>Springfield</td><td>200</td><td>Ohio</td></tr></table></div>
-		</li>
-		<li test-id='10' class='node when Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.userTryToSaveTheNewEmployeeUsingAllRequiredFields(java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>When user try to save the new employee 'using all required fields'</div>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.addingFirstUserIntoDatabase(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given the first user is added into database using username "john" and password "1234"</div>
 
 
 		</li>
-		<li test-id='11' class='node then Pass' status='Pass'>
-			<div class="step-name" title="(codexstester.bdd.stepsdef.DataTableSteps.theResultIsSuccessfulAndResponseIs(java.lang.String,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Then the result is 'failure' and response is 'create.employeeDTO.firstName: must not be empty'</div>
+		<li test-id='9' class='node given Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundDBSteps.databaseIsAccessed())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given database is accessed</div>
+
+
+		</li>
+		<li test-id='10' class='node given Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.usersEndpointIsAccessedUsingGet())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>Given users endpoint is accessed using get</div>
+
+
+		</li>
+		<li test-id='11' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundAPISteps.theResultIsSuccessfulOrErrorFromHttpResponse(int,java.lang.String))"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the result is 200 successful http response</div>
+
+
+		</li>
+		<li test-id='12' class='node and Pass' status='Pass'>
+			<div class="step-name" title="(codexstester.bdd.stepsdef.BackgroundUserSteps.theResponseIsValidatedAgainFromGetUsersEndpointRequest())"><span class='status pass' title='Pass'><i class='material-icons'>check_circle</i></span>And the response is validated again from get users endpoint request</div>
 
 
 		</li>
@@ -317,7 +321,7 @@
 			<ul id='category-collection' class='category-collection'>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@EmployeeOK</span>
+						<span class='category-name'>@FinalValidation</span>
 						<span class='category-status right'>
 						<span class='label pass'>1</span>
 						</span>
@@ -339,8 +343,8 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Oct 14, 2024 10:54:00 AM</td>
-										<td class='linked' test-id='2'>Create Employee using all required fields</td>
+										<td>Oct 14, 2024 11:43:43 AM</td>
+										<td class='linked' test-id='7'>Second fields validation for get users endpoint</td>
 										<td><span class='test-status Pass'>Pass</span></td>
 									</tr>
 								</tbody>
@@ -350,7 +354,7 @@
 				</li>
 				<li class='category displayed active'>
 					<div class='category-heading'>
-						<span class='category-name'>@EmployeeNOK</span>
+						<span class='category-name'>@InitialValidation</span>
 						<span class='category-status right'>
 						<span class='label pass'>1</span>
 						</span>
@@ -372,8 +376,46 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Oct 14, 2024 10:54:00 AM</td>
-										<td class='linked' test-id='7'>Create Employee forgetting firstName</td>
+										<td>Oct 14, 2024 11:43:43 AM</td>
+										<td class='linked' test-id='2'>First fields validation for get users endpoint</td>
+										<td><span class='test-status Pass'>Pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@BackgroundUser</span>
+						<span class='category-status right'>
+						<span class='label pass'>2</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span status="pass" class='label green accent-4 white-text'>Passed: 2</span>
+							
+							
+						</div>
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Oct 14, 2024 11:43:43 AM</td>
+										<td class='linked' test-id='2'>First fields validation for get users endpoint</td>
+										<td><span class='test-status Pass'>Pass</span></td>
+									</tr>
+									<tr>
+										<td>Oct 14, 2024 11:43:43 AM</td>
+										<td class='linked' test-id='7'>Second fields validation for get users endpoint</td>
 										<td><span class='test-status Pass'>Pass</span></td>
 									</tr>
 								</tbody>
@@ -410,25 +452,25 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>9</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Oct 14, 2024 10:53:57 AM</div>
+					<div class='panel-lead'>Oct 14, 2024 11:43:41 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Oct 14, 2024 10:54:00 AM</div>
+			 		<div class='panel-lead'>Oct 14, 2024 11:43:43 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>00 00 02.394</div>
+					<div class='panel-lead'>00 00 02.535</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -464,7 +506,7 @@
 							<th>Passed %</th>
 						</tr>
 						<tr>
-							<td>@EmployeeOK</td>
+							<td>@FinalValidation</td>
 							<td>1</td>
 							<td>0</td>
 							<td>0</td>
@@ -473,8 +515,17 @@
 							</td>
 						</tr>
 						<tr>
-							<td>@EmployeeNOK</td>
+							<td>@InitialValidation</td>
 							<td>1</td>
+							<td>0</td>
+							<td>0</td>
+							<td>
+									100%
+							</td>
+						</tr>
+						<tr>
+							<td>@BackgroundUser</td>
+							<td>2</td>
 							<td>0</td>
 							<td>0</td>
 							<td>
@@ -507,8 +558,8 @@
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				grandChildCount: 8,
-				passGrandChild: 8,
+				grandChildCount: 9,
+				passGrandChild: 9,
 				failGrandChild: 0,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
@@ -520,7 +571,7 @@
 		
 		<script>
 			var timeline = {
-			        "Employee Handling":0.049
+			        "User endpoint validation":0.036
 			};
 		</script>
 		
