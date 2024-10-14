@@ -1,4 +1,4 @@
-package com.huntercodexs.codexstester.bdd.runner;
+package codexstester.bdd.runner;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.SelectClasspathResource;
@@ -10,7 +10,7 @@ import static io.cucumber.core.options.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("features/login")
 @ConfigurationParameter(
         key = GLUE_PROPERTY_NAME,
-        value = "com.huntercodexs.codexstester.bdd.stepsdef"
+        value = "codexstester.bdd.stepsdef"
 )
 public class LoginReportRunnerTest {
 }

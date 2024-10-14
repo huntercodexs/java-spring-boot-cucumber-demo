@@ -1,4 +1,4 @@
-package com.huntercodexs.codexstester.bdd.stepsdef.integration;
+package codexstester.bdd.stepsdef.integration;
 
 import com.huntercodexs.javaspringbootcucumber.JavaSpringBootCucumberApplication;
 import io.cucumber.spring.CucumberContextConfiguration;

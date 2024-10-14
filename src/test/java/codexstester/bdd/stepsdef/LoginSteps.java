@@ -1,4 +1,4 @@
-package com.huntercodexs.codexstester.bdd.stepsdef;
+package codexstester.bdd.stepsdef;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
