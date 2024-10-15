@@ -2,18 +2,16 @@ package codexstester.bdd.stepsdef;
 
 import com.huntercodexs.javaspringbootcucumber.dto.Employee;
 import com.huntercodexs.javaspringbootcucumber.dto.EmployeeAddress;
-import io.cucumber.java.DataTableType;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 import java.util.List;
 import java.util.Map;
 
 public class DataTableSteps {
 
-    @DataTableType
     public Employee employeeEntry(Map<String, String> entry) {
         return new Employee(
                 entry.get("id"),
@@ -26,7 +24,6 @@ public class DataTableSteps {
                 entry.get("email"));
     }
 
-    @DataTableType
     public EmployeeAddress employeeAddressEntry(Map<String, String> entry) {
         return new EmployeeAddress(
                 entry.get("id"),

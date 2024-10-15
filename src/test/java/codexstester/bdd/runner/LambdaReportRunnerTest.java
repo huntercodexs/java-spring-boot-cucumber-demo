@@ -7,10 +7,10 @@ import org.junit.platform.suite.api.Suite;
 import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
-@SelectClasspathResource("features/datatable")
+@SelectClasspathResource("features/lambda")
 @ConfigurationParameter(
         key = GLUE_PROPERTY_NAME,
         value = "codexstester.bdd.stepsdef"
 )
-public class DataTableReportRunnerTest {
+public class LambdaReportRunnerTest {
 }
