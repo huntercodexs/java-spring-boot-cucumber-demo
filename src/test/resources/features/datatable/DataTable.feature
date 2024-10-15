@@ -9,6 +9,7 @@
       Given user wants to create an employee using the following attributes
         | id | firstName | lastName | dateOfBirth | startDate  | endDate | employmentType | email                |
         |  1 | John      | Smith    | 1988-08-30  | 2001-11-05 |         | Contract       | john.smith@email.com |
+        |  2 | Mary      | Smith    | 1988-08-30  | 2001-11-05 |         | Contract       | mary.smith@email.com |
 
       And with the following address information
         | id | street          | city        | number | state |

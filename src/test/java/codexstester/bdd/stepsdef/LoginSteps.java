@@ -3,6 +3,7 @@ package codexstester.bdd.stepsdef;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import lombok.val;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -69,15 +70,17 @@ public class LoginSteps {
 
     }
 
-    @Then("login status should be {}")
-    public void loginSuccessfully(boolean status) {
+    @Then("login status should be {string}")
+    public void loginSuccessfully(String status) {
 
-        if (status) {
+        System.out.println(status + " - " + Boolean.getBoolean(status));
+
+        if (status.equals("true")) {
 
             // When login is successfully the button logout is visible
             WebElement logoutButton = wait.until(
                     ExpectedConditions.elementToBeClickable(By.xpath(LOGOUT_BUTTON_XPATH)));
-            Assert.assertEquals(status, logoutButton.isDisplayed());
+            Assert.assertTrue(logoutButton.isDisplayed());
 
         } else {
 

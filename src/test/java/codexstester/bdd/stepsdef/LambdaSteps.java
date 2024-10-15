@@ -102,17 +102,8 @@ public class LambdaSteps implements En {
             });
         });
 
-        And("with the following address information", (String test) -> {
+        And("with the following template string definition", (String test) -> {
             System.out.println("====> " + test);
-        });
-
-        When("user try to save the new employee {string}", (String testContext) -> {
-            System.out.println("====> " + testContext);
-        });
-
-        Then("the result is {string} and response is {string}", (String expectedResult, String expectedResponse) -> {
-            System.out.println("====> " + expectedResult);
-            System.out.println("====> " + expectedResponse);
         });
     }
 }

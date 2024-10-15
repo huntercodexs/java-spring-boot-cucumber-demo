@@ -11,7 +11,7 @@
       Then login status should be <status>
 
       Examples:
-      | username   | password      | status |
-      | "student"  | "Password123" | true   |
-      | "student"  | "Password444" | false  |
-      | "stud3nt"  | "Password123" | false  |
+      | username   | password      | status   |
+      | "student"  | "Password123" | "true"   |
+      | "student"  | "Password444" | "false"  |
+      | "stud3nt"  | "Password123" | "false"  |

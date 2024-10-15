@@ -39,10 +39,7 @@
         | world war 1 | 10-06-1800 | 10-02-1900 |
         | world war 2 | 11-00-1900 | 10-04-1950 |
 
-      And with the following address information
+      And with the following template string definition
         """
         Test Template String Java
         """
-
-      When user try to save the new employee 'using all required fields'
-      Then the result is 'successful' and response is ''
