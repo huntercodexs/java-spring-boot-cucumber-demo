@@ -188,7 +188,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<!-- Set the test source directory -->
-					<testSourceDirectory>src/test/java/com/huntercodexs/javaspringbootcucumber</testSourceDirectory>
+					<testSourceDirectory>src/test/java/codexstester</testSourceDirectory>
 					<trimStackTrace>false</trimStackTrace>
 					<excludes>
 						<exclude>**/*Integration.java</exclude>
